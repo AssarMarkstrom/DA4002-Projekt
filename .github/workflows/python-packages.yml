@@ -1,6 +1,6 @@
 name: python-package
 
-on: [push]
+on: [fork]
 
 jobs:
   build:
