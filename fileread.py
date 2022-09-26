@@ -3,7 +3,7 @@ import pandas as pd
 #Convert TSV file to CSV..
 with open("filename.tsv") as file:
     # Passing tsv.file to reader(), and with tab delimiter
-    tsv_file = csv.reader(file, delimiter="\n")
+    tsv_file = csv.reader(file, delimiter="\t")
 
     for line in tsv_file:
         print(line)
