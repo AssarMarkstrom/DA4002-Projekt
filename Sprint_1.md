@@ -1,4 +1,4 @@
-# Sprint GOAL: Can read example file and present information.
+# Sprint GOAL: Read example file and present a simple summary and/or visualisation.
 | Read Data | Priority |
 | --------- | -------- |
 | Detect troublesome values | 1 |
