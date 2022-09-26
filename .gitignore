@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-two_columns_larger.txt
 0.mcmc
 1.mcmc
 2.mcmc
@@ -7,9 +5,6 @@ two_columns_larger.txt
 distance_matrix.txt
 helarsprestationer_from_2017.csv
 product-backlog.md
-README.md
 Sprint_1.md
 two_columns.txt
-=======
-
->>>>>>> 4e793c2ff61f35cf830d7d91dc5d6c3dfd715afd
+two_columns_larger.txt
