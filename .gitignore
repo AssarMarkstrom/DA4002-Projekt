@@ -10,3 +10,4 @@ two_columns.txt
 two_columns_larger.txt
 testfiles
 __pycache__
+*.swp
