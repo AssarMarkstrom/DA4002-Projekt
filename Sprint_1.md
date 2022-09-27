@@ -5,7 +5,7 @@
 | Reject files of incorrect format | 1 |
 | Detect troublesome values | 1 |
 | Detect variable types | 1 |
-| Store file | 1 |
+| Store original file and a copy of that file for future manipulation | 2 |
 | Handle troublesome values | 2 |
 | Accept excel files | 2 | 
 | Store original file and filtered copies of that file | 2 |
