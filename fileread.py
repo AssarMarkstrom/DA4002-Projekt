@@ -31,4 +31,9 @@ def id_file(filename):
         return "CSV"
     if filename[-4:] == ".tsv":
         return "TSV"
+    if filename[-4:] == ".xls":
+        return "XLS"
+    if filename[-5:] == ".xlsx":
+        return "XLSX"
+
     return "UNKNOWN"
