@@ -1,12 +1,13 @@
+#!/bin/env python3
 import pandas as pd
 
 #Convert TSV file to CSV..
-with open("filename.tsv") as file:
-    # Passing tsv.file to reader(), and with tab delimiter
-    tsv_file = csv.reader(file, delimiter="\t")
-
-    for line in tsv_file:
-        print(line)
+#with open("filename.tsv") as file:
+#    # Passing tsv.file to reader(), and with tab delimiter
+#    tsv_file = csv.reader(file, delimiter="\t")
+#
+#    for line in tsv_file:
+#        print(line)
 
 # Using split? data = []
 # for line in f:
@@ -24,3 +25,10 @@ def load_file(filepath):
             val = val.split(',')
             # something to check stored data, maybe use checkcol?
             # if checkcol is false: col = val, checkcol = true.
+
+def id_file(filename):
+    if filename[-4:] == ".csv":
+        return "CSV"
+    if filename[-4:] == ".tsv":
+        return "TSV"
+    return "UNKNOWN"
