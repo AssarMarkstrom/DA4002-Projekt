@@ -11,37 +11,37 @@ class ReadFileTestCase(unittest.TestCase):
 
 # ID file tests
     # if the id is a csv file, it reads as CSV.
-    def test_id_csv(self):
+    def test_get_filetype_csv(self):
         self.assertEqual(
-                fileread.id_file(self.csv_file),
+                fileread.get_filetype(self.csv_file),
                 "CSV",
                 "Incorrect file type")
 
     # if the id is a tsv file, it reads as TSV.
-    def test_id_tsv(self):
+    def test_get_filetype_tsv(self):
         self.assertEqual(
-                fileread.id_file(self.tsv_file), 
+                fileread.get_filetype(self.tsv_file), 
                 "TSV",
                 "Incorrect file type")
     
     # if the id isa xls file, it reads as XLS.
-    def test_id_xls(self):
+    def test_get_filetype_xls(self):
         self.assertEqual(
-                fileread.id_file(self.xls_file),
+                fileread.get_filetype(self.xls_file),
                 "XLS",
                 "Incorrect file type")
 
     # if the file id is a xlsx file, it reads as XLSX.
-    def test_id_xlsx(self):
+    def test_get_filetype_xlsx(self):
         self.assertEqual(
-                fileread.id_file(self.xlsx_file),
+                fileread.get_filetype(self.xlsx_file),
                 "XLSX",
                 "Incorrect file type")
 
     # if the id is an unknown file, it reads as UNKNOWN.
-    def test_id_unknown(self):
+    def test_get_filetype_unknown(self):
         self.assertEqual(
-                fileread.id_file("asdada"),
+                fileread.get_filetype("asdada"),
                 "UNKNOWN",
                 "Incorrect file type")
 
