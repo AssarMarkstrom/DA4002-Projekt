@@ -1,14 +1,18 @@
 #!/bin/env python3
 import pandas as pd
 
-def read_file(filename):
+def read_file(filename, separator=None):
     filetype = get_filetype(filename)
     if filetype == "CSV":
-        return pd.read_csv(file_path)
+        if not separator:
+            separator = ","
+        return pd.read_csv(filename, sep=separator)
     elif filetype == "TSV":
-        return pd.read_csv(file_path, sep='\t')
+        if not separator:
+            separator = "\t"
+        return pd.read_csv(filename, sep='\t')
     elif filetype == "XLS" or filetype == "XLSX":
-        return pd.read_excel
+        return None
     return None
 
 

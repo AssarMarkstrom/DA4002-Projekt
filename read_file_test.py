@@ -4,10 +4,11 @@ import fileread
 
 class ReadFileTestCase(unittest.TestCase):
     def setUp(self):
-        self.csv_file = "testfile.csv"
-        self.tsv_file = "testfile.tsv"
-        self.xls_file = "testfile.xls"
-        self.xlsx_file = "testfile.xlsx"
+        self.csv_semicolon_file =  "testfiles/testfile_semicolon.csv"
+        self.csv_file =  "testfiles/testfile.csv"
+        self.tsv_file =  "testfiles/testfile.tsv"
+        self.xls_file =  "testfiles/testfile.xls"
+        self.xlsx_file = "testfiles/testfile.xlsx"
 
 # ID file tests
     # if the id is a csv file, it reads as CSV.
@@ -45,8 +46,20 @@ class ReadFileTestCase(unittest.TestCase):
                 "UNKNOWN",
                 "Incorrect file type")
 
-# READ CSV FILE TESTS
-
+    # READ CSV FILE TESTS
+    def test_read_file_csv_semicolon(self):
+        pd = fileread.read_file(self.csv_semicolon_file, separator=";")
+        self.assertTrue(pd is not None)
+        # Expect 625 rows and 9 columns
+        self.assertEqual(pd.shape, (625, 9))
+        labels = ['Kalenderår', 
+                'Kod', 
+                'Benämning', 
+                'Omfattning', 
+                'Enhet', 
+                'Nivå inom studieordning', 
+                'Kvinnor', 'Män', 'Total']
+        self.assertEqual(list(pd.columns), labels)
 # READ TSV FILE TESTS
 
 # READ XLS OR XLSX
