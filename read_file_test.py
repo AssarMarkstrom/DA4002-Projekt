@@ -91,8 +91,8 @@ class ReadFileTestCase(unittest.TestCase):
                 'Kvinnor', 'Män', 'Total']
        self.assertEqual(list(pd.columns), labels)
 
-# READ XLS OR XLSX
-    
+# READ XLS
+    # files with xls.
     def test_read_file_xls(self):
        pd = fileread.read_file(self.xls_file)
        self.assertTrue(pd is not None)
@@ -107,4 +107,24 @@ class ReadFileTestCase(unittest.TestCase):
                 'Kvinnor', 'Män', 'Total']
        self.assertEqual(list(pd.columns), labels)
 
-# READ FILE TESTS
+# READ XLSX FILE TEST
+    # files with xlsx.
+    def test_read_file_xlsx(self):
+        pd = fileread.read_file(self.xlsx_file)
+        self.assertTrue(pd is not None)
+        # Expect 11 rows and 9 columns
+        self.assertEqual(pd.shape, (10,9))
+        labels = ['Kalenderår',
+                'Kod',
+                'Benämning',
+                'Omfattning',
+                'Enhet',
+                'Nivå inom studieordning',
+                'Kvinnor', 'Män', 'Total']
+        self.assertEqual(list(pd.columns), labels)
+
+# READ BAD FILE
+    # files that are incorrect.
+    def test_read_file_bad(self):
+        pd = fileread.read_file("ADASDASDASD")
+        self.assertTrue(pd is None)

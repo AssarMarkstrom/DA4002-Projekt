@@ -1,5 +1,4 @@
 #!/bin/env python3
-from ast import Try
 import pandas as pd
 
 def read_file(filename):
