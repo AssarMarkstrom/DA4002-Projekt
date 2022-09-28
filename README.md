@@ -67,7 +67,7 @@ ex.
     * Various bug fixes and optimizations
 
 * 0.1
-    * Initial Release
+    * Initial Released
 
 ## License
 
