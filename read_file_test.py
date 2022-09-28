@@ -6,9 +6,9 @@ class ReadFileTestCase(unittest.TestCase):
     def setUp(self):
         self.csv_semicolon_file =  "testfiles/testfile_semicolon.csv"
         self.csv_file =  "testfiles/testfile.csv"
-        self.tsv_file =  "testfiles/testfile_small.tsv"
-        self.xls_file =  "testfiles/testfile_small.xls"
-        self.xlsx_file = "testfiles/testfile_small.xlsx"
+        self.tsv_file =  "testfiles/testfile.tsv"
+        self.xls_file =  "testfiles/testfile.xls"
+        self.xlsx_file = "testfiles/testfile.xlsx"
 
 # ID file tests
     # if the id is a csv file, it reads as CSV.
@@ -60,37 +60,51 @@ class ReadFileTestCase(unittest.TestCase):
                 'Nivå inom studieordning', 
                 'Kvinnor', 'Män', 'Total']
         self.assertEqual(list(pd.columns), labels)
-
-    # files with colon
-    #def test_read_file_csv_colon(self):
-      # pd = fileread.read_file(self.csv_colon_file, seperator=",")
-       # self.assertTrue(pd is not None)
-        # Except 11 rows and 9 columns
-       # self.assertEqual(pd.shape,(11,9))
-        #labels = ['Kalenderår',
-               # 'Kod',
-               # 'Omfattning',
-               # 'Enhet',
-               # 'Nivå inom studieordning',
-               # 'Kvinnor', 'Män', 'Total']
-        #self.assertEqual(list(pd.columns), labels)
+    
+    def test_read_file_csv(self):
+       pd = fileread.read_file(self.csv_file)
+       self.assertTrue(pd is not None)
+       # Expect 11 rows and 9 columns
+       self.assertEqual(pd.shape, (10,9))
+       labels = ['Kalenderår',
+                'Kod',
+                'Benämning',
+                'Omfattning',
+                'Enhet',
+                'Nivå inom studieordning',
+                'Kvinnor', 'Män', 'Total']
+       self.assertEqual(list(pd.columns), labels)
 
 # READ TSV FILE TESTS
     # files with tabs.
-    #def test_read_file_csv_tab(self):
-       # pd = fileread.read_file(self.csv_tab_file, seperator="'\t'")
-       # self.assertTrue(pd is not None)
-        # Ecpect 11 rows and 9 columns
-       # self.assertEqual(pd.shape, (11,9))
-        #labels = ['Kalenderår',
-               # 'Kod',
-               # 'Benämning',
-               # 'Omfattning',
-               # 'Enhet',
-               # 'Nivå inom stuieordning',
-               # 'Kvinnor', 'Män', 'Total']
-        #self.assertEqual(list(pd.columns), labels)
+    def test_read_file_tsv(self):
+       pd = fileread.read_file(self.tsv_file)
+       self.assertTrue(pd is not None)
+       # Expect 11 rows and 9 columns
+       self.assertEqual(pd.shape, (10,9))
+       labels = ['Kalenderår',
+                'Kod',
+                'Benämning',
+                'Omfattning',
+                'Enhet',
+                'Nivå inom studieordning',
+                'Kvinnor', 'Män', 'Total']
+       self.assertEqual(list(pd.columns), labels)
 
 # READ XLS OR XLSX
+    
+    def test_read_file_xls(self):
+       pd = fileread.read_file(self.xls_file)
+       self.assertTrue(pd is not None)
+       # Expect 11 rows and 9 columns
+       self.assertEqual(pd.shape, (10,9))
+       labels = ['Kalenderår',
+                'Kod',
+                'Benämning',
+                'Omfattning',
+                'Enhet',
+                'Nivå inom studieordning',
+                'Kvinnor', 'Män', 'Total']
+       self.assertEqual(list(pd.columns), labels)
 
 # READ FILE TESTS

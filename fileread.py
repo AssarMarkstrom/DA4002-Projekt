@@ -12,7 +12,7 @@ def read_file(filename):
     elif filetype == "TSV":
         return pd.read_csv(filename, sep='\t')
     elif filetype == "XLS" or filetype == "XLSX":
-        return None
+        return pd.read_excel(filename)
     return None
 
 
