@@ -2,9 +2,10 @@
 from ast import Try
 import pandas as pd
 
-def read_file(filename, separator=None):
+def read_file(filename):
     filetype = get_filetype(filename)
     if filetype == "CSV":
+<<<<<<< HEAD
         if not separator:
             seperator = ";"   
             """
@@ -15,9 +16,13 @@ def read_file(filename, separator=None):
                 seperator = ";"
             """
         return pd.read_csv(filename, sep=separator)
+=======
+        try:
+            return pd.read_csv(filename, sep = ",")
+        except:
+            return pd.read_csv(filename, sep = ";")
+>>>>>>> 52673b7 (fixed issues on read_file_test)
     elif filetype == "TSV":
-        if not separator:
-            separator = "\t"
         return pd.read_csv(filename, sep='\t')
     elif filetype == "XLS" or filetype == "XLSX":
         return None
@@ -34,4 +39,10 @@ def get_filetype(filename):
     if filename[-5:] == ".xlsx":
         return "XLSX"
 
+<<<<<<< HEAD
     return "UNKNOWN"
+=======
+    return "UNKNOWN"
+
+#print(read_file("testfiles/helarsprestationer_from_2017.csv"))
+>>>>>>> 52673b7 (fixed issues on read_file_test)

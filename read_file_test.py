@@ -4,9 +4,9 @@ import fileread
 
 class ReadFileTestCase(unittest.TestCase):
     def setUp(self):
-        self.csv_semicolon_file =  "testfiles/testfile_semicolon_small.csv"
-        self.csv_colon_fiile =  "testfiles/testfile_colon_small.csv"
-        self.tsv_tab_file =  "testfiles/testfile_tab_small.tsv"
+        self.csv_semicolon_file =  "testfiles/testfile_semicolon.csv"
+        self.csv_file =  "testfiles/testfile.csv"
+        self.tsv_file =  "testfiles/testfile_small.tsv"
         self.xls_file =  "testfiles/testfile_small.xls"
         self.xlsx_file = "testfiles/testfile_small.xlsx"
 
@@ -14,14 +14,13 @@ class ReadFileTestCase(unittest.TestCase):
     # if the id is a csv file, it reads as CSV.
     def test_get_filetype_csv(self):
         self.assertEqual(
-                fileread.get_filetype(self.csv_semicolon_file),
-                fileread.get_filetype(self.csv_colon_file),
+                fileread.get_filetype(self.csv_file),
                 "CSV",
                 "Incorrect file type")
 
     # if the id is a tsv file, it reads as TSV.
     def test_get_filetype_tsv(self):
-        self.assertEqual(fileread.get_filetype(self.tsv_tab_file), 
+        self.assertEqual(fileread.get_filetype(self.tsv_file), 
                 "TSV",
                 "Incorrect file type")
     
@@ -49,10 +48,10 @@ class ReadFileTestCase(unittest.TestCase):
     # READ CSV FILE TESTS
     # files with semicolon.
     def test_read_file_csv_semicolon(self):
-        pd = fileread.read_file(self.csv_semicolon_file, separator=";")
+        pd = fileread.read_file(self.csv_semicolon_file)
         self.assertTrue(pd is not None)
         # Expect 11 rows and 9 columns
-        self.assertEqual(pd.shape, (11, 9))
+        self.assertEqual(pd.shape, (10, 9))
         labels = ['Kalenderår', 
                 'Kod', 
                 'Benämning', 
