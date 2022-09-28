@@ -25,4 +25,5 @@ def detect_NAs(df):
     print(df[df.isna().any(axis=1)])
     
 
-file_read(r".\testfiles\25_years_of_salgskimmer.csv")
+#file_read(".\testfiles\25_years_of_salgskimmer.csv")
+pd.show_versions()
