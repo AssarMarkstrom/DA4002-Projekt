@@ -2,22 +2,14 @@
 from ast import Try
 import pandas as pd
 
-def read_file(filename, separator=None):
+def read_file(filename):
     filetype = get_filetype(filename)
     if filetype == "CSV":
-        if not separator:
-            seperator = ";"   
-            """
-            try:
-                pd.read_csv(filename[:, 0], seperator = ",")
-                seperator = ","
-            except:
-                seperator = ";"
-            """
-        return pd.read_csv(filename, sep=separator)
+        try:
+            return pd.read_csv(filename, sep = ",")
+        except:
+            return pd.read_csv(filename, sep = ";")
     elif filetype == "TSV":
-        if not separator:
-            separator = "\t"
         return pd.read_csv(filename, sep='\t')
     elif filetype == "XLS" or filetype == "XLSX":
         return None
@@ -33,5 +25,4 @@ def get_filetype(filename):
         return "XLS"
     if filename[-5:] == ".xlsx":
         return "XLSX"
-
     return "UNKNOWN"
