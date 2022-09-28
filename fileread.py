@@ -6,12 +6,14 @@ def read_file(filename, separator=None):
     filetype = get_filetype(filename)
     if filetype == "CSV":
         if not separator:
+            seperator = ";"   
+            """
             try:
                 pd.read_csv(filename[:, 0], seperator = ",")
                 seperator = ","
             except:
                 seperator = ";"
-
+            """
         return pd.read_csv(filename, sep=separator)
     elif filetype == "TSV":
         if not separator:
@@ -33,5 +35,3 @@ def get_filetype(filename):
         return "XLSX"
 
     return "UNKNOWN"
-
-print(read_file(".\\testfiles\\helarsprestationer_from_2017.csv"))
