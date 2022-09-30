@@ -39,7 +39,7 @@ def interval_filter(df, colname, lower_bound, upper_bound):
     
 df = fileread.read_file(".\projectdata\helarsprifestationer_from_2017.csv")
 df = col_select(df, ["Kalenderår", "Män"])
-# print(interval_filter(df, "Kalenderår", 2019, 2020))
+print(interval_filter(df, "Kalenderår", 2019, 2020))
 
 df.select_dtypes(include=['int64','float64'])
 
