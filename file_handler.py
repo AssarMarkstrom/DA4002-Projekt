@@ -1,6 +1,11 @@
 #!/bin/env python3
 import pandas as pd
 
+# out own excpetion.
+class FilenameException(Exception):
+    def __init__(self):
+        pass
+
 def read_file(filename):
     filetype = get_filetype(filename)
     if filetype == "CSV":
@@ -12,25 +17,20 @@ def read_file(filename):
         return pd.read_csv(filename, sep='\t')
     elif filetype == "XLS" or filetype == "XLSX":
         return pd.read_excel(filename)
-    return None
+    raise FilenameException()
  
-def save_file(filename):
-    df = pd.Dataframe[filename]
-    df._to_csv('filename', encoding='utf-8', index=False)
+def save_file(filename, df):
+    filetype = get_filetype(filename)
+    if filetype == "CSV":
+        df.to_csv(filename, encoding='utf-8', index=False)
+    elif filetype == "TSV":
+        df.to_csv(filename, encoding='utf-8', index=False, sep= "\t")
+    elif filetype == "XLS" or filetype == "XLSX":
+        df.to_excel(filename, index=False, engine='openpyxl')
+    else:
+        raise FilenameException()
 
-def check_content(filename)
-    # checks max rows, which the files has 600 something..
-    pd.set_option('max_info_columns', 600)
-    df.info()
-    # check types
-    df.dtypes
-    for i, v in enumerate(df.columns)
-    print (i,v)
-
-
-
-
-get_filetype(filename):
+def get_filetype(filename):
     if filename[-4:] == ".csv":
         return "CSV"
     if filename[-4:] == ".tsv":

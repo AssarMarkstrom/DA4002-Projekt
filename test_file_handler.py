@@ -1,6 +1,9 @@
 #!/bin/env python3
 import unittest
 import file_handler
+import pandas as pd
+# for removing files.
+import os
 
 class ReadFileTestCase(unittest.TestCase):
     def setUp(self):
@@ -9,7 +12,9 @@ class ReadFileTestCase(unittest.TestCase):
         self.tsv_file =  "testfiles/testfile.tsv"
         self.xls_file =  "testfiles/testfile.xls"
         self.xlsx_file = "testfiles/testfile.xlsx"
-
+        data = {'col1': [1, 2], 'col2': [3, 4]}
+        self.df = pd.DataFrame(data=data)
+        
 # ID file tests
     # if the id is a csv file, it reads as CSV.
     def test_get_filetype_csv(self):
@@ -126,5 +131,35 @@ class ReadFileTestCase(unittest.TestCase):
 # READ BAD FILE
     # files that are incorrect.
     def test_read_file_bad(self):
-        pd = file_handler.read_file("ADASDASDASD")
-        self.assertTrue(pd is None)
+        with self.assertRaises(file_handler.FilenameException):
+            file_handler.read_file("ADASDASDASD")
+
+# SAVE FILES
+    def test_save_file_csv(self):
+        file_handler.save_file("tmp.csv", self.df)
+        df = file_handler.read_file("tmp.csv")
+        os.remove("tmp.csv")
+        self.assertTrue(df.equals(self.df))
+
+    def test_save_file_tsv(self):
+        file_handler.save_file("tmp.tsv", self.df)
+        df = file_handler.read_file("tmp.tsv")
+        os.remove("tmp.tsv")
+        self.assertTrue(df.equals(self.df))
+
+    def test_save_file_xls(self):
+        file_handler.save_file("tmp.xls", self.df)
+        df = file_handler.read_file("tmp.xls")
+        os.remove("tmp.xls")
+        self.assertTrue(df.equals(self.df))
+
+    def test_save_file_tsv(self):
+        file_handler.save_file("tmp.xlsx", self.df)
+        df = file_handler.read_file("tmp.xlsx")
+        os.remove("tmp.xlsx")
+        self.assertTrue(df.equals(self.df))
+    
+    # Testing the made exception.
+    def test_save_file_unknown(self):
+        with self.assertRaises(file_handler.FilenameException):
+                file_handler.save_file("asdasdasd", self.df)
