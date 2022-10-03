@@ -3,22 +3,21 @@ Summary of file
 """
 from fileread import *
 from column_filter import *
-import pandas as pd
 
 def get_colnames(df):
     return list(df.columns)
     
 def show_head(df):
+    """Returns head of DataFrame
+
+    :param df: A DataFrame
+    :type df: pandas.DataFrame
+    :return: Head of DataFrame
+    :rtype: pandas.DataFrame
+    """
     head = df.head()
     return head
-"""
-Numerical data 
-"""
-def show_full_summary(df):
-    colnames_list = get_colnames(df)
-    full_summary = df[colnames_list].describe()
-    return full_summary
-    
+# Numerical data 
 def show_count(df):
     colnames_list = get_colnames(df)
     count = df[colnames_list].count()
