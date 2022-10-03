@@ -2,8 +2,13 @@
 import unittest
 import file_handler
 import pandas as pd
-# for removing files.
+# a modual that removes files from directory. 
 import os
+
+
+# The setUp sets up differents tests, in this case different,
+# testfiles. There is a test data in order to see if, 
+# the dataframe works.
 
 class ReadFileTestCase(unittest.TestCase):
     def setUp(self):
@@ -12,6 +17,7 @@ class ReadFileTestCase(unittest.TestCase):
         self.tsv_file =  "testfiles/testfile.tsv"
         self.xls_file =  "testfiles/testfile.xls"
         self.xlsx_file = "testfiles/testfile.xlsx"
+       # test data for dataframe. 
         data = {'col1': [1, 2], 'col2': [3, 4]}
         self.df = pd.DataFrame(data=data)
         
@@ -65,7 +71,8 @@ class ReadFileTestCase(unittest.TestCase):
                 'Nivå inom studieordning', 
                 'Kvinnor', 'Män', 'Total']
         self.assertEqual(list(pd.columns), labels)
-    
+    # Reads the filename, and verifies the condition as well
+    # 
     def test_read_file_csv(self):
        pd = file_handler.read_file(self.csv_file)
        self.assertTrue(pd is not None)
@@ -135,6 +142,9 @@ class ReadFileTestCase(unittest.TestCase):
             file_handler.read_file("ADASDASDASD")
 
 # SAVE FILES
+# Saves a temporary file in github, and saves.
+# Due to os.remove, it removes the files so that,
+# it does overflow with saved files.
     def test_save_file_csv(self):
         file_handler.save_file("tmp.csv", self.df)
         df = file_handler.read_file("tmp.csv")
