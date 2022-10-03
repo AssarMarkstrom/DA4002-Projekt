@@ -2,6 +2,7 @@
 import unittest
 from fileread import *
 from summary import *
+import pandas as pd
 
 class TestSummary(unittest.TestCase):
     def setUp(self):
@@ -11,11 +12,10 @@ class TestSummary(unittest.TestCase):
     def test_get_colnames(self):
         self.assertEqual(get_colnames(self.df), list(self.df.head(1)))
     
-    def test_show_full_summary(self):
-        self.assertIsNotNone(show_full_summary(self.df))
+    #def test_get_numerical_coltypes(self):
+        #self.assertTrue()
 
-    def test_show_head(self):
-        self.assertTrue(
-                len(show_head(self.df)) <= 5)
+    def test_get_head(self):
+        self.assertLessEqual(len(get_head(self.df)),5)
 
    

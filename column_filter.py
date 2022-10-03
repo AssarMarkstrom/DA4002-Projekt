@@ -1,6 +1,7 @@
 """
 Filtering dataframe based on columns
 """
+#!/bin/env python3
 import fileread
 
 def col_select(df, col_names, keep = True):
@@ -37,9 +38,7 @@ def interval_filter(df, colname, lower_bound, upper_bound):
     df = df.where((df[colname] >= lower_bound) & (df[colname] <= upper_bound))
     return df.dropna()
     
-df = fileread.read_file(".\projectdata\helarsprestationer_from_2017.csv")
-df = col_select(df, ["Kalenderår", "Män"])
+
 # print(interval_filter(df, "Kalenderår", 2019, 2020))
 
-df.select_dtypes(include=['int64','float64'])
 

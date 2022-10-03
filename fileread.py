@@ -14,7 +14,6 @@ def read_file(filename):
         return pd.read_excel(filename)
     return None
 
-
 def get_filetype(filename):
     if filename[-4:] == ".csv":
         return "CSV"
