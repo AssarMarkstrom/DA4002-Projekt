@@ -1,6 +1,7 @@
 #!/bin/env python3
 import unittest
 from file_handler import *
+from column_filter import *
 from summary import *
 import pandas as pd
 
