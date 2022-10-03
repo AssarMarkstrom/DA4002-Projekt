@@ -1,88 +1,132 @@
-"""
-Summary of file
-"""
-from fileread import *
-from column_filter import *
+#!/bin/env python3
+# # Get summary of file
+from file_handler import *
 import pandas as pd
 
 def get_colnames(df):
+    """" Get colnames from dataframe
+
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: list of colnames
+    :rtype: list
+    """
     return list(df.columns)
+
+def get_numerical_coltypes(df):
+    """Help functions to only get numerical col_types
+
+    :param df: DataFrame
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    df_numerical = df.select_dtypes(include=['int64', 'float64'])
+    return df_numerical 
     
-def show_head(df):
+def get_head(df):
+    """ Show head of Dataframe
+
+    :param df: Dataframe 
+    :type df: DataFrame
+    :return: head of Dataframe
+    :rtype: DataFrame
+    """
     head = df.head()
-    print(head)
-"""
-Numerical data 
-"""
-def show_full_summary(df):
-    colnames_list = get_colnames(df)
-    full_summary = df[colnames_list].describe()
-    print(full_summary)
-    
-def show_count(df):
-    colnames_list = get_colnames(df)
-    count = df[colnames_list].count()
-    print(count)
+    return head
 
-def show_mean(df):
-    colnames_list = get_colnames(df)
+# Numerical data 
+def get_mean(df):
+    """ Calculate mean of a numerical columns in df
+
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    colnames_list = get_colnames(get_numerical_coltypes(df))
     mean = df[colnames_list].mean()
-    print(mean)
+    return mean
 
-def show_median(df):
-    colnames_list = get_colnames(df)
+def get_median(df):
+    """ Calculate median of a numerical columns in df
+
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    colnames_list = get_colnames(get_numerical_coltypes(df))
     median = df[colnames_list].median()
-    print(median)
+    return median
 
-def show_std(df):
-    colname_list = get_colnames(df)
-    std = df[colname_list].std()
-    print(std)
+def get_std(df):
+    """ Calculate std of a numerical columns in df
 
-def show_min(df):
-    colnames_list = get_colnames(df)
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    colnames_list = get_colnames(get_numerical_coltypes(df))
+    std = df[colnames_list].std()
+    return std
+
+def get_min(df):
+    """ Calculate min of a numerical columns in df
+
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    colnames_list = get_colnames(get_numerical_coltypes(df))
     min = df[colnames_list].min()
-    print(min)
+    return min
 
-def show_max(df):
-    colnames_list = get_colnames(df)
+def get_max(df):
+    """ Calculate max of a numerical columns in df
+
+    :param df: DataFrame 
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    colnames_list = get_colnames(get_numerical_coltypes(df))
     max = df[colnames_list].max()
-    print(max)
+    return max
 
-"""
-Discrete data 
-"""
-def show_unique_values(df):
+# Discrete data 
+def get_unique_values_count(df):
+    """count # unique values in cols
+
+    :param df: DataFrame
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
     colnames_list = get_colnames(df)
-    df_unique = df.drop_duplicates(subset=colnames_list)
-    print(df_unique)
+    list = []
+    for col in colnames_list:
+        col_unique_values = len(df.drop_duplicates(subset=col, keep = 'first'))
+        list.append(col_unique_values)
+    df_unique_count = pd.DataFrame([list], index = ['count'], columns=colnames_list)
+    return df_unique_count 
 
-def show_unique_values_count(df):
+def get_duplicate_values_count(df):
+    """ count # duplicated values in cols
+
+    :param df: DataFrame
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
     colnames_list = get_colnames(df)
-    df_unique_count = len(df.drop_duplicates(subset=colnames_list))
-    print(df_unique_count)
+    list = []
+    for col in colnames_list:
+        col_unique_values = len(df[[col]]) - len(df.drop_duplicates(subset=col, keep = 'first'))
+        list.append(col_unique_values)
+    df_unique_count = pd.DataFrame([list], index = ['count'], columns=colnames_list)
+    return df_unique_count 
 
-def show_duplicate_values_count(df):
-    colnames_list = get_colnames(df)
-    df_duplicate_count = len(df) - len(df.drop_duplicates(subset=colnames_list))
-    print(df_duplicate_count)
-
-"""
-# create df
-data_1 = [10,20,30,40,50,60]
-data_2 = ["hej", "hej", "då", "asd"] 
-df_1 = pd.DataFrame(data_1, columns=['Numbers'])
-df_2 = pd.DataFrame(data_2, columns=['text'])
-print("---Numerical---")
-print(show_full_summary(df_1))
-print(show_count(df_1))
-print(show_mean(df_1))
-print(show_median(df_1))
-print(show_std(df_1))
-print(show_min(df_1))
-print(show_max(df_1))
-print("---Discrete---")
-print(show_unique_values(df_2))
-print(show_unique_values_count(df_2))
-print(show_duplicate_values_count(df_2))
-"""
+# df_1 = read_file("testfiles/testfile_sum.csv")
