@@ -31,12 +31,13 @@ def interval_filter(df, colname, lower_bound, upper_bound):
         lower_bound/upper_bound: Interval which df is filtered on
     Output: Filtered dataframe containing anly rows with values between lower and upper bound
     """
+
     if lower_bound < 0 or upper_bound < lower_bound or len(df) < upper_bound:
         raise "Bad bounds"
     if colname not in df.select_dtypes(include=['int64','float64']):  # Check that column is numeric
         raise "Non-numeric column select"
     df = df.where((df[colname] >= lower_bound) & (df[colname] <= upper_bound))
-    return df.dropna()
+    return df.dropna(how='all')
 
 
 def row_interval(df, lower_bound, upper_bound):
@@ -61,10 +62,10 @@ def value_filter(df, colname, value):
     Output: Dataframe containing rows which have value in them 
     """
     value = str(value)
-    coltype = df[colname].dtypes
-    df[colname] = df[colname].astype(str)
+    coltype = df[colname].dtypes  # Store column's original datatype
+    df[colname] = df[colname].astype(str) # Change column to string
     df = df.where(df[colname].str.contains(value))
-    df = df.dropna()
+    df = df.dropna(how='all')
     df[colname] = df[colname].astype(coltype)
 
     if len(df) == 0:
