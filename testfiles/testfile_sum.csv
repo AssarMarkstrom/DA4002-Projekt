@@ -1,7 +1,7 @@
-"Numbers_1", "Numbers_2", "words_1"
-1,2,"What"
-14, 2, "what"
-290, 14, "hello"
-17, 38, "okay"
-789, 8, "hi"
-39, 333, "hello"
+Numbers_1,Numbers_2,words_1
+1,2,What
+14, 2, what
+290, 14, hello
+17, 38, okay
+789, 8, hi
+39, 333, hello

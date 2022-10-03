@@ -10,14 +10,14 @@ def get_colnames(df):
     
 def show_head(df):
     head = df.head()
-    print(head)
+    return head
 """
 Numerical data 
 """
 def show_full_summary(df):
     colnames_list = get_colnames(df)
     full_summary = df[colnames_list].describe()
-    print(full_summary)
+    return full_summary
     
 def show_count(df):
     colnames_list = get_colnames(df)
@@ -67,22 +67,5 @@ def show_duplicate_values_count(df):
     df_duplicate_count = len(df) - len(df.drop_duplicates(subset=colnames_list))
     print(df_duplicate_count)
 
-"""
-# create df
-data_1 = [10,20,30,40,50,60]
-data_2 = ["hej", "hej", "då", "asd"] 
-df_1 = pd.DataFrame(data_1, columns=['Numbers'])
-df_2 = pd.DataFrame(data_2, columns=['text'])
-print("---Numerical---")
-print(show_full_summary(df_1))
-print(show_count(df_1))
-print(show_mean(df_1))
-print(show_median(df_1))
-print(show_std(df_1))
-print(show_min(df_1))
-print(show_max(df_1))
-print("---Discrete---")
-print(show_unique_values(df_2))
-print(show_unique_values_count(df_2))
-print(show_duplicate_values_count(df_2))
-"""
+df_1 = read_file("testfiles/testfile_sum.csv")
+print((show_full_summary("str")))
