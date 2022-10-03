@@ -14,7 +14,8 @@
 * sprint 1 planning phase
 * unclear product goal
 * git learning curve
-* anaconda and virtual envs 
+* anaconda and virtual envs
+* following the product backlog/editing 
 
 ## What do we wnat to try next
 * remote work
