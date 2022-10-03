@@ -1,6 +1,6 @@
 #!/bin/env python3
 # # Get summary of file
-from fileread import *
+from file_handler import *
 from column_filter import *
 import pandas as pd
 
