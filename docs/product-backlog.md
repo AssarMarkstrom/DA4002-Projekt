@@ -1,4 +1,5 @@
 # Product Backlog - MoSCoW
+# Sprint II goal: Finish file_handler, filter, summary and graphics. A prototype using all the files with a super basic interface 
 ## Must Have:
 - ***Read Data***:
     - Detect troublesome values.
