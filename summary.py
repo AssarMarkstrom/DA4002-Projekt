@@ -1,7 +1,6 @@
 #!/bin/env python3
 # # Get summary of file
 from file_handler import *
-from column_filter import *
 import pandas as pd
 
 def get_colnames(df):
