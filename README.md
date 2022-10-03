@@ -30,7 +30,7 @@ The purpose of this prototype is to be able to have many different views of the 
 ## Getting Started
 
 ### Documentation
-[a link](https://github.com/AssarMarkstrom/sphinx-documentation/blob/main/build/html/code.html)]
+[link(https://htmlpreview.github.io/?https://github.com/AssarMarkstrom/sphinx-documentation/blob/main/build/html/code.html)]
 ### Dependencies
 
 * Describe any prerequisites, libraries, OS version, etc., needed before installing program.
