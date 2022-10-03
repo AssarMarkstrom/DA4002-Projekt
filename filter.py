@@ -33,9 +33,9 @@ def interval_filter(df, colname, lower_bound, upper_bound):
     """
 
     if lower_bound < 0 or upper_bound < lower_bound or len(df) < upper_bound:
-        raise "Bad bounds"
+        raise Exception("Bad bounds")
     if colname not in df.select_dtypes(include=['int64','float64']):  # Check that column is numeric
-        raise "Non-numeric column select"
+        raise Exception("Non-numeric column select")
     df = df.where((df[colname] >= lower_bound) & (df[colname] <= upper_bound))
     return df.dropna(how='all')
 
@@ -48,7 +48,7 @@ def row_interval(df, lower_bound, upper_bound):
     Output: Dataframe containing only rows in the given interval 
     """
     if lower_bound < 0 or upper_bound < lower_bound or len(df) < upper_bound:
-        raise "Bad bounds"
+        raise Exception("Bad bounds")
     df = df[lower_bound-1:upper_bound]
     return df 
 
