@@ -21,8 +21,7 @@ def get_numerical_coltypes(df):
     :return: DataFrame
     :rtype: DataFrame
     """
-    df_numerical = df.select_dtypes(include=['int64', 'float64'])
-    return df_numerical 
+    return df.select_dtypes(include=['int64', 'float64']) 
     
 def get_head(df):
     """ Show head of Dataframe

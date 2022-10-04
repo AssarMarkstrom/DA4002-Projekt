@@ -26,7 +26,7 @@ def read_file(filename):
  
 # Definition save_file will save the file based on what type of file it is.
 # Example: if it is a CSV, in the unittest it will save a tmp.csv on github. 
-# Due to os, it removes the file so that it does not intefere with other files. 
+# Due to os, it removes the file so th it does notat intefere with other files. 
 
 def save_file(filename, df):
     filetype = get_filetype(filename)

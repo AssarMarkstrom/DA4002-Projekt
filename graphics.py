@@ -1,6 +1,6 @@
 
 # from file_reader import file_read
-import fileread 
+import file_handler
 #from fileread import read_file
 import matplotlib.pyplot as plt
 
