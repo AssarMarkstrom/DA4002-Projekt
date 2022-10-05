@@ -38,20 +38,11 @@ def line_plot(df, cols):
     plt.ylabel(colname2)
     plt.plot(df[colname1], df[colname2])
     plt.show()
-
-
-
-
-df=fileread.read_file(".\\projectdata\\helarsprestationer_from_2017.csv")
-
-print(df) 
-
-
 #scatter_plot(df, ["Kalenderår","Total"])
 #histogram_plot(df, ["Kalenderår","Total"])
 #bar_plot(df, ["Kalenderår","Total"])
-line_plot(df, ["Kalenderår","Total"])
-
+# line_plot(df, ["Kalenderår","Total"])
+print("ok")
 
 #o=["Kalendår","Kod"]
 
