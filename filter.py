@@ -2,6 +2,20 @@
 Filtering dataframe based on columns
 """
 
+class BadBounds(Exception):
+    def __init__(self):
+        pass
+
+def get_numerical_coltypes(df):
+    """Help functions to only get numerical col_types
+
+    :param df: DataFrame
+    :type df: DataFrame
+    :return: DataFrame
+    :rtype: DataFrame
+    """
+    return df.select_dtypes(include=['int64', 'float64']) 
+
 def col_select(df, col_names, keep = True):
     """
     input:
@@ -31,12 +45,13 @@ def interval_filter(df, colname, lower_bound, upper_bound):
         lower_bound/upper_bound: Interval which df is filtered on
     Output: Filtered dataframe containing anly rows with values between lower and upper bound
     """
-
-    if lower_bound < 0 or upper_bound < lower_bound or len(df) < upper_bound:
-        raise Exception("Bad bounds")
-    if colname not in df.select_dtypes(include=['int64','float64']):  # Check that column is numeric
+    if lower_bound < 0 or upper_bound < lower_bound:
+        raise BadBounds
+    if colname not in get_numerical_coltypes(df):  # Check that column is numeric
         raise Exception("Non-numeric column select")
     df = df.where((df[colname] >= lower_bound) & (df[colname] <= upper_bound))
+
+
     return df.dropna(how='all')
 
 
@@ -48,7 +63,7 @@ def row_interval(df, lower_bound, upper_bound):
     Output: Dataframe containing only rows in the given interval 
     """
     if lower_bound < 0 or upper_bound < lower_bound or len(df) < upper_bound:
-        raise Exception("Bad bounds")
+        raise BadBounds
     df = df[lower_bound-1:upper_bound]
     return df 
 

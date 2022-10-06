@@ -4,6 +4,7 @@ def get_menu_files():
             "2.": "helarsprestationer_from_2017.csv"
     }
     return menu_files
+    
 def get_menu_files_options():
     menu_files_options = {
         "1.": "Own file",
@@ -18,14 +19,22 @@ def get_menu_main():
         "3.": "Show file summary", 
         "4.": "Graph data",
         "5.": "Save current dataframe",
-        "6.": "End program"
+        "6.": "Undo previous changes",
+        "7.": "Undo all changes",
+        "8.": "End program"
     }
     return menu_main
+
 def get_menu_filter():
     menu_filter = {
-        "1.": "Filter by column name",   
+        "1.": "Remove or keeps column/s by name", 
         "2.": "Filter by column value",
         "3.": "Filter by column value interval",
-        "4.": "Choose row interval"
-        }
+        "4.": "Choose row interval",
+        "5.": "Return to start menu"
+    }
     return menu_filter
+
+def get_col_name_menu(col_list):
+    col_name_menu = {v: k for v, k in enumerate(col_list)}
+    return col_name_menu
