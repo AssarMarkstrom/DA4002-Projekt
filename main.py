@@ -1,6 +1,8 @@
-from file_handler import read_file, get_filetype, FilenameException
+from file_handler import read_file, FilenameException, get_filetype, save_file
 from filter import *
+from menus import *
 import pandas as pd
+from menus import *
 
 def input_control(user_input, n_options):
     """ Control that user_input is a valid input
@@ -13,23 +15,15 @@ def input_control(user_input, n_options):
         return int(user_input)
     else: return None
 
-def start_up_meny():
+def start_up_meny(menu_files, menu_files_options):
     """Start up meny for the program
 
     :return: A path to an existing file
     :rtype: String
     """
-    data_dict = {
-    "1.": "25_years_of_salgskimmer.csv",
-    "2.": "helarsprestationer_from_2017.csv"
-    }
-    options_dict = {
-    "1.": "Own file",
-    "2.": "From datafolder"    
-    }
     while True:
-        for choice in options_dict:
-            print(choice, options_dict[choice])
+        for choice in menu_files:
+            print(choice, menu_files[choice])
         user_input = input("Do you want to choose your own file or a file from our datafolder\n:")
         user_choice = input_control(user_input, 2)
         if user_choice == 1:
@@ -40,12 +34,12 @@ def start_up_meny():
             except FilenameException:
                 print("Could not find the file you were looking for, please try again!")
         elif user_choice == 2:
-            for choice in data_dict:
-                print(choice, data_dict[choice])
+            for choice in menu_files_options:
+                print(choice, menu_files_options[choice])
             user_input = input("Choose a file!\n:")
             user_choice = input_control(user_input, 2)
             if user_choice is not None:
-                path = "projectdata/"+ data_dict[(str(user_choice)+".")]
+                path = "projectdata/"+ menu_files_options[(str(user_choice)+".")]
                 return path
             else: print("Something went wrong, please try again!")
         else: print("Something went wrong, please try again!")
@@ -83,31 +77,33 @@ class File:
     self.df = read_file(path)
     self.versions = [self.df]
 
-def app():
-    menu_dict = {
-    "1.": "Show DataFrame",   
-    "2.": "Filter file",
-    "3.": "Show file summary", 
-    "4.": "Graph data",
-    "5.": "Save current dataframe",
-    "6.": "End program"
-    }
+def app(df, menu_main, menu_filter):
+    
     while True:
-        for choice in menu_dict:
-            print(choice, menu_dict[choice])
+        for choice in menu_main:
+            print(choice, menu_main[choice])
         user_input = input("Please select an option!\n:")
         user_choice = input_control(user_input, 6)
 
         if user_choice == 1:
-            pass
+            print(df.head())
         elif user_choice == 2:
+            # Filter menu
             pass
         elif user_choice == 3:
             pass            
         elif user_choice == 4:
+            # Graph menu
             pass
         elif user_choice == 5:
-            pass
+            break
+            file_name = input("Chose filename\n: ")
+            file_type = input("Chose filentype\n: ")
+            while file_type not in ["csv" , "xlsx", "tsv", "xls"]:
+                print("Invalid filetype, try again, csv, tsv, xls or xlsx")
+                file_type = input("Chose filentype\n: ")            
+            my_file = file_name + "." + file_type
+            save_file(my_file, df)
         elif user_choice == 6:
             # Ask if Save df, save graphs
             print("Goodbye!")
@@ -116,10 +112,10 @@ def app():
             print("Please select a valid option!\n:")
 
 def main():
-    path = start_up_meny() # get file_path
+    path = start_up_meny(get_menu_files(), get_menu_files_options()) # get file_path
     data = File(path)
-    df = data.df
-    print(df)
+    app(data.versions[-1], get_menu_main(), get_menu_filter())
+    
 
 
 if __name__ == '__main__':
