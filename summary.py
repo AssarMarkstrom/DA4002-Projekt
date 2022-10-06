@@ -22,17 +22,6 @@ def get_numerical_coltypes(df):
     :rtype: DataFrame
     """
     return df.select_dtypes(include=['int64', 'float64']) 
-    
-def get_head(df):
-    """ Show head of Dataframe
-
-    :param df: Dataframe 
-    :type df: DataFrame
-    :return: head of Dataframe
-    :rtype: DataFrame
-    """
-    head = df.head()
-    return head
 
 # Numerical data 
 def get_mean(df):
