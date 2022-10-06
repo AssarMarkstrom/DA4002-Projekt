@@ -1,6 +1,6 @@
-from tracemalloc import start
-from file_handler import *
+from file_handler import read_file, get_filetype, FilenameException
 from filter import *
+import pandas as pd
 
 def input_control(user_input, n_options):
     """ Control that user_input is a valid input
@@ -80,12 +80,7 @@ class File:
   def __init__(self, path):
     self.path = path
     self.type = get_filetype(path)
-    self.df = change_dtypes(read_file(path))
-    self.version = [self.df]
-
-# EXAMPLE
-dataset = File("projectdata/25_years_of_salgskimmer.csv")
-working_df = dataset.df
+    self.df = read_file(path)
 
 def app():
     menu_dict = {
@@ -123,14 +118,7 @@ def main():
     path = start_up_meny() # get file_path
     data = File(path)
     df = data.df
-    df.version.append(df)
-    app()
-    df_filtered = row_interval(df, 1,39)
-    print(undo_change_df())
-    print(undo_all_changes_df())
-
-
-
+    print(df)
 
 
 if __name__ == '__main__':
