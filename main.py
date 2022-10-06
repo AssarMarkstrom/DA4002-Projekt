@@ -70,17 +70,18 @@ def change_dtypes(df):
                 df[col] = df[col]
     return df
 
-def undo_change_df(df):
-    return df.versions[-2]
+def undo_change_df(data):
+    return data.versions[-2]
 
-def undo_all_changes_df(df):
-    return df.versions[0]
+def undo_all_changes_df(data):
+    return data.versions[0]
 
 class File:
   def __init__(self, path):
     self.path = path
     self.type = get_filetype(path)
     self.df = read_file(path)
+    self.versions = [self.df]
 
 def app():
     menu_dict = {
