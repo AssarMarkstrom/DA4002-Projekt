@@ -1,6 +1,6 @@
 #!/bin/env python3
 # # Get summary of file
-from file_handler import *
+from menus import input_control, get_user_choice
 import pandas as pd
 
 def get_colnames(df):
@@ -117,4 +117,32 @@ def get_duplicate_values_count(df):
     df_unique_count = pd.DataFrame([list], index = ['count'], columns=colnames_list)
     return df_unique_count 
 
-# df_1 = read_file("testfiles/testfile_sum.csv")
+def summary_app(df, menu_summary):
+    while True:
+        user_choice = get_user_choice(menu_summary, "Please select an option!\n:")
+
+        if user_choice == 1: # Mean
+            return get_mean(df)
+        
+        elif user_choice == 2: # Median
+            return get_median(df)
+
+        elif user_choice == 3: # Std
+            return get_std(df)
+
+        elif user_choice == 4: # Min
+            return get_min(df)
+
+        elif user_choice == 5: # Max
+            return get_max(df)
+
+        elif user_choice == 6: # Unique values
+            return get_unique_values_count(df)
+
+        elif user_choice == 7: # Duplicate values
+            return get_duplicate_values_count(df)
+
+        elif user_choice == 8: # Return to start
+            pass
+        else:
+            print("Please select a valid option!\n:")

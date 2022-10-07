@@ -1,15 +1,11 @@
-"""
-Filtering dataframe based on columns
-"""
+from menus import get_col_name_menu, input_control, get_user_choice
 
 class BadBounds(Exception):
     def __init__(self):
         pass
-
 class OutOfRange(Exception):
     def __init__(self):
         pass
-
 
 def get_numerical_coltypes(df):
     """Help functions to only get numerical col_types
@@ -41,7 +37,6 @@ def col_select(df, col_names, keep = True):
 
     return df
 
-
 def interval_filter(df, colname, lower_bound, upper_bound):
     """
     Input:
@@ -58,8 +53,7 @@ def interval_filter(df, colname, lower_bound, upper_bound):
     df = df.where((df[colname] >= lower_bound) & (df[colname] <= upper_bound))
     df[colname] = df[colname].astype(coltype)
 
-    return df.dropna(how='all')
-
+    return df.dropna(how = 'all')
 
 def row_interval(df, lower_bound, upper_bound):
     """
@@ -75,7 +69,6 @@ def row_interval(df, lower_bound, upper_bound):
     df = df[lower_bound-1:upper_bound]
     return df 
 
-
 def value_filter(df, colname, value):
     """
     Input:
@@ -90,7 +83,97 @@ def value_filter(df, colname, value):
     df = df.where(df[colname].str.contains(value))
     df = df.dropna(how='all')
     df[colname] = df[colname].astype(coltype)
-
-    if len(df) == 0:
-        print("Value not found in dataframe")
     return df
+
+def filter_app(data, menu_filter):
+
+    df = data.versions[-1]
+    col_options = list(df.columns)
+    col_name_filter_menu = get_col_name_menu(col_options)
+    selected_col_list = []
+    user_choice = get_user_choice(menu_filter)
+
+    if user_choice == 1: # keep/remove columns
+        while True:
+            selected_col = get_user_choice(col_name_filter_menu, "Select column name\n:")
+            if selected_col in df.columns and selected_col not in selected_col_list:
+                selected_col_list.append(selected_col)
+                col_options.remove(selected_col)
+                answer = input_control(input("Select another column? (yes: 1, no: 2)\n: "), 2)
+                if answer == 2:
+                    while True:
+                        print("Selected columns:", selected_col_list)
+                        question = "Do you want to keep or remove the selected columns (keep: 1, remove: 2)\n:"
+                        answer = input_control(question, 2)
+                        if answer == 1:
+                            return col_select(df, selected_col_list, keep = True)
+                        elif answer == 2:
+                            return col_select(df, selected_col_list, keep = False)
+            else:
+                print("Invalid column name, try again!")
+
+    elif user_choice == 2: # Filter by column value
+        while True:
+            selected_col = get_user_choice(col_name_filter_menu, "What column do you want to filter on? \n:")
+            if selected_col in df.columns:
+                break
+            else:
+                print("Invalid column name, try again!")
+        search_value = input("What string/value do you want to filter by? \n:")
+        return value_filter(df, selected_col, search_value)
+
+    elif user_choice == 3: # Filter by column value interval
+        col_options = get_numerical_coltypes(df)
+        while True:
+            selected_col = get_user_choice(col_name_filter_menu, "What column do you want to filter on? \n:")
+            if selected_col in df.columns:
+                break
+            else:
+                print("Invalid column name, try again!")
+        while True:
+            lower_bound = input("Choose lower bound \n:", )
+            try:
+                lower_bound = float(lower_bound)
+                break
+            except ValueError:
+                print("Non-numeric input, try again")
+        while True:
+            upper_bound = input("Choose upper bound \n:", )
+            try:
+                upper_bound = float(upper_bound)
+                interval_filter(df, selected_col, float(lower_bound), upper_bound)
+                break
+            except ValueError:
+                print("Non-numeric input, try again")
+            except BadBounds:
+                print("Upper bound must be larger than lower bound.")                
+
+        return interval_filter(df, selected_col, lower_bound, upper_bound)
+
+    elif user_choice == 4: # Choose row interval
+        while True:
+            lower_bound = input("Choose lower bound \n:", )
+            try:
+                lower_bound = int(lower_bound)
+                break
+            except ValueError:
+                print("Non-numeric input, try again")
+        while True:
+            upper_bound = input("Choose upper bound \n:", )
+            try:
+                upper_bound = int(upper_bound)
+                row_interval(df, int(lower_bound), upper_bound)
+                break
+            except ValueError:
+                print("Non-numeric input, try again")
+            except BadBounds:
+                print("Upper bound must be larger than lower bound.")
+            except OutOfRange:
+                print("Row index out of range.")
+
+        return row_interval(df, lower_bound, upper_bound)
+
+    elif user_choice == 5: # return to start
+        pass
+    else:
+        print("Please select a valid option!\n:")

@@ -1,3 +1,26 @@
+def get_user_choice(menu, question = "Please select an option!\n:"):
+    n_options = len(menu)
+    for choice in menu:
+        print(choice, menu[choice])
+    return input_control(question, n_options)
+
+def input_control(question, n_options):
+    """ Asks a question and control that the answer is a valid input
+
+    :param question: A question from program->user
+    :type question: String
+    :param n_options: Number of valid answers 
+    :type n_options: int
+    :return: The selected answer as int and if it's not valid return None
+    :rtype: int or None
+    """
+    
+    user_input = input(question)
+    if user_input.isdigit() and 0 < int(user_input) <= n_options:
+        return int(user_input)
+    else: 
+        return None
+
 def get_menu_files():
     menu_files = {
             "1.": "25_years_of_salgskimmer.csv",
@@ -47,6 +70,16 @@ def get_menu_summary():
         "8.": "Return to start menu"
     }
     return menu_summary
+
+def get_menu_graphics():
+    menu_graphics = {
+        "1.": "Scatterplot", 
+        "2.": "Line plot",
+        "3.": "Barchart",
+        "4.": "Histogram",
+        "5.": "Return to start menu"
+    }
+    return menu_graphics
 
 def get_col_name_menu(col_list):
     col_name_menu = {v: k for v, k in enumerate(col_list)}
