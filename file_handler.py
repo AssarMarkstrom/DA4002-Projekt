@@ -10,18 +10,37 @@ class FilenameException(Exception):
 # and read it's contents. 
 # Examples if the filename is a csv, it will be comma seperated.
 # the FilnameException detects files that are unknown. 
+def convert_to_numeric(val):
+    """convert to numeric if decimal == ','
+
+    :param val: value
+    :type val: object
+    :return: the intended value
+    :rtype: float64
+    """
+    new_val = val.replace(',','.')
+    return float(new_val)
+
+def change_dtypes(df):
+    for col in df.columns:
+        if pd.api.types.is_object_dtype(df[col]):
+            try:
+                df[col] = df[col].apply(convert_to_numeric)
+            except ValueError:
+                df[col] = df[col]
+    return df
 
 def read_file(filename):
     filetype = get_filetype(filename)
     if filetype == "CSV":
         try:
-            return pd.read_csv(filename, sep = ",")
+            return change_dtypes(pd.read_csv(filename, sep = ","))
         except:
-            return pd.read_csv(filename, sep = ";")
+            return change_dtypes(pd.read_csv(filename, sep = ";"))
     elif filetype == "TSV":
-        return pd.read_csv(filename, sep='\t')
+        return change_dtypes(pd.read_csv(filename, sep='\t'))
     elif filetype == "XLS" or filetype == "XLSX":
-        return pd.read_excel(filename)
+        return change_dtypes(pd.read_excel(filename))
     raise FilenameException()
  
 # Definition save_file will save the file based on what type of file it is.
