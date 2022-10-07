@@ -1,7 +1,7 @@
 from file_handler import read_file, FilenameException, get_filetype, save_file
-from menus import get_col_name_menu, get_menu_files, get_menu_files_options, get_menu_main, get_menu_filter
+from menus import get_col_name_menu, get_menu_files, get_menu_files_options, get_menu_main, get_menu_filter, get_menu_summary
 from filter import col_select, value_filter, interval_filter, row_interval, BadBounds, OutOfRange, get_numerical_coltypes
-from summary import get_max, get_mean, get_median, get_std, get_duplicate_values_count, get_unique_values_count
+from summary import get_max, get_mean, get_median, get_std, get_min, get_max, get_duplicate_values_count, get_unique_values_count
 import pandas as pd
 
 def input_control(user_input, n_options):
@@ -57,7 +57,7 @@ def filter_app(data, menu_filter):
         print(choice, menu_filter[choice])
     user_input = input("Please select an option!\n:")
     user_choice = input_control(user_input, len(menu_filter))
-    col_options = list(data.df.columns)
+    col_options = list(df.columns)
     if user_choice == 1: # remove columns
         selected_col_list = []
         while True:
@@ -104,6 +104,7 @@ def filter_app(data, menu_filter):
         return value_filter(df, selected_col, search_value)
 
     elif user_choice == 3: # Filter by column value interval
+        col_options = get_numerical_coltypes(df)
         while True:
             col_name_filter_menu =  get_col_name_menu(col_options)
             for choice in col_name_filter_menu:
@@ -163,6 +164,41 @@ def filter_app(data, menu_filter):
     elif user_choice == 5: # return to start
         pass
 
+    else:
+        print("Please select a valid option!\n:")
+
+def summary_app(df, menu_summary):
+    while True:
+        for choice in menu_summary:
+            print(choice, menu_summary[choice])
+        user_input = input("Please select an option!\n:")
+        user_choice = input_control(user_input, len(menu_summary))
+
+        if user_choice == 1: # Mean
+            return get_mean(df)
+        
+        elif user_choice == 2: # Median
+            return get_median(df)
+
+        elif user_choice == 3: # Std
+            return get_std(df)
+
+        elif user_choice == 4: # Min
+            return get_min(df)
+
+        elif user_choice == 5: # Max
+            return get_max(df)
+
+        elif user_choice == 6: # Unique values
+            return get_unique_values_count(df)
+
+        elif user_choice == 7: # Duplicate values
+            return get_duplicate_values_count(df)
+
+        elif user_choice == 8: # Return to start
+            pass
+        else:
+            print("Please select a valid option!\n:")
 
 def app(data, menu_main):
     while True:
@@ -178,14 +214,13 @@ def app(data, menu_main):
             data.versions.append(filter_app(data, get_menu_filter()))
 
         elif user_choice == 3: # File summary
-            pass
+            print(summary_app(data.versions[-1], get_menu_summary()))
 
         elif user_choice == 4:
             # Graph menu
             pass
 
         elif user_choice == 5:
-            continue
             file_name = input("Chose filename\n: ")
             file_type = input("Chose filentype\n: ")
             while file_type not in ["csv" , "xlsx", "tsv", "xls"]:

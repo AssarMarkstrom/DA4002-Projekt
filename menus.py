@@ -35,6 +35,19 @@ def get_menu_filter():
     }
     return menu_filter
 
+def get_menu_summary():
+    menu_summary = {
+        "1.": "Show mean", 
+        "2.": "Show median",
+        "3.": "Show std",
+        "4.": "Show min",
+        "5.": "Show max",
+        "6.": "Show # unique values",
+        "7.": "Show # duplicate values",
+        "8.": "Return to start menu"
+    }
+    return menu_summary
+
 def get_col_name_menu(col_list):
     col_name_menu = {v: k for v, k in enumerate(col_list)}
     return col_name_menu
