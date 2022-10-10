@@ -11,11 +11,6 @@ class TestSummary(unittest.TestCase):
     
     def test_get_colnames(self):
         self.assertEqual(get_colnames(self.df), list(self.df.head(1)))
-    
-    #def test_get_numerical_coltypes(self):
-        #self.assertTrue()
 
-    def test_get_head(self):
-        self.assertLessEqual(len(get_head(self.df)),5)
 
    
