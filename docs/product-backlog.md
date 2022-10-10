@@ -1,26 +1,25 @@
 # Product Backlog - MoSCoW
+
 ## Sprint I goal: Start working on Read/filter/summary/graphics.
-## Sprint II goal: Finish file_handler, filter, summary and graphics. A prototype using all the files with a super basic interface 
+
+## Sprint II goal: Finish file_handler, filter, summary and graphics. A prototype including using all the files with a super basic interface.
+
+## Sprint III:
+
 ## Must Have:
 - ***Read Data***:
-    - Detect troublesome values.
-    -  Accept csv and tsv files.
-    - Reject files of incorrect format
-    - Detect variable types
-    -  Store file.
+    - Accept csv, tsv and excel (xls, xlsx) files.
+    - Reject files of incorrect format.
+    - Detect variable types.
 - ***Data manipulation***:
     - User can filter data based on:
-    - column names/number
-    - row numbers
-    - Specific row values
-    - Specific column values
+    - Column names
+    - Row numbers
 - ***Data visualisation***:
     - ***Summary***:
         - Median
         - Mean
         - Standard deviation
-        - Varians
-        - Mode
     - ***Diagrams***:
         - Histogram
         - Bar chart
@@ -29,19 +28,20 @@
         - Pie chart
 ## Should Have:
 - ***Read Data***:
-    - Handle troublesome values.
-    - Accept excel files.
-    - Store original file and filtered copies of that file. (Undo)
+    - Store file.
+    - Coverting from object type in pandas.
+    - Store original file and filtered copies of that file.
 - ***Data manipulation***:
     - User can filter data based on:
-    - Strings or values containing specific char/digits
-    - Max/Min
-    - Odd Values
-    - NA-values.
-    - Intervall sorting
+    - Specific values
+    - Using information from summary to filter on specific values for example min/max.
+    - Filter on value intervals
 - ***Data visualisation***:
     - ***Summary***:
-        - Basic summary updated when dataset is filtered.
+        - Min
+        - Max
+        - Unique values
+        - Duplicate values
 ## Could Have:
 - ***Read Data***:
     - Users can interactively manipulate troublesome values.
