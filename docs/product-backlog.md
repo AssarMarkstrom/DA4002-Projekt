@@ -20,7 +20,7 @@
         - Median
         - Mean
         - Standard deviation
-    - ***Diagrams***:
+    - ***Graphics***:
         - Histogram
         - Bar chart
         - Scatter plot
@@ -31,6 +31,7 @@
     - Store file.
     - Coverting from object type in pandas.
     - Store original file and filtered copies of that file.
+    - User can revert back to previous version of the file.
 - ***Data manipulation***:
     - User can filter data based on:
     - Specific values
@@ -42,14 +43,15 @@
         - Max
         - Unique values
         - Duplicate values
+    - ***Graphics***
+        - Updated in real time when applying filter settings.
 ## Could Have:
 - ***Read Data***:
-    - Users can interactively manipulate troublesome values.
-    - User can manually change variable type assignment
-    - Undo filtering for x number of times.
+    - Storing filters or graphs as pictures.
 - ***Data visualisation***:
-    - View data in table for columns.
+    - GUI for Graphics and Summary.
 ## Won’t Have:
-- ***Read Data***:
-    - GUI manipulating values.
-    - File converter for other file-types.
+- Users can interactively manipulate troublesome values.
+- User can manually change variable type assignment
+- GUI manipulating values.
+- File converter for other file-types.
