@@ -4,7 +4,7 @@
 
 ## Sprint II goal: Finish file_handler, filter, summary and graphics. A prototype including using all the files with a super basic interface.
 
-## Sprint III:
+## Sprint III: new protoype, enhetstester, dokumentation, GUI dabble.
 
 ## Must Have:
 - ***Read Data***:
