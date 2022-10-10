@@ -151,7 +151,7 @@ class ReadFileTestCase(unittest.TestCase):
         os.remove("tmp.csv")
         self.assertTrue(df.equals(self.df))
 
-    def test_save_file_tsv(self):
+    def test_save_file_tsv(self):  
         file_handler.save_file("tmp.tsv", self.df)
         df = file_handler.read_file("tmp.tsv")
         os.remove("tmp.tsv")
@@ -163,7 +163,7 @@ class ReadFileTestCase(unittest.TestCase):
         os.remove("tmp.xls")
         self.assertTrue(df.equals(self.df))
 
-    def test_save_file_tsv(self):
+    def test_save_file_xslx(self):
         file_handler.save_file("tmp.xlsx", self.df)
         df = file_handler.read_file("tmp.xlsx")
         os.remove("tmp.xlsx")

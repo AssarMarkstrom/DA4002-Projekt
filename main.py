@@ -61,7 +61,9 @@ def app(data, menu_main):
             data.versions.append(filter_app(data, get_menu_filter()))
 
         elif user_choice == 3: # File summary
-            print(summary_app(data.versions[-1], get_menu_summary()))
+            sum_return = summary_app(data.versions[-1], get_menu_summary())
+            if sum_return is not None:
+                print(sum_return)
 
         elif user_choice == 4:
             graphics_app(data.versions[-1], get_menu_graphics())

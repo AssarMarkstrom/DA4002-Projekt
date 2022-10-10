@@ -143,6 +143,6 @@ def summary_app(df, menu_summary):
             return get_duplicate_values_count(df)
 
         elif user_choice == 8: # Return to start
-            pass
+            return
         else:
             print("Please select a valid option!\n:")

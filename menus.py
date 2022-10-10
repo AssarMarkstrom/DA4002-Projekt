@@ -1,7 +1,10 @@
-def get_user_choice(menu, question = "Please select an option!\n:"):
+def get_user_choice(menu, question = "Please select an option!\n:", check = True):
     n_options = len(menu)
     for choice in menu:
         print(choice, menu[choice])
+    if check is False:
+        return input(question)
+
     return input_control(question, n_options)
 
 def input_control(question, n_options):
@@ -18,7 +21,7 @@ def input_control(question, n_options):
     user_input = input(question)
     if user_input.isdigit() and 0 < int(user_input) <= n_options:
         return int(user_input)
-    else: 
+    else:
         return None
 
 def get_menu_files():
