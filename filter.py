@@ -87,7 +87,7 @@ def value_filter(df, colname, value):
 
 def filter_app(data, menu_filter):
 
-    df = data.versions[-1]
+    df = data.get_current()
     col_options = list(df.columns)
     col_name_filter_menu = get_col_name_menu(col_options)
     selected_col_list = []

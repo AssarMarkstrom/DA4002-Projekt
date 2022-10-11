@@ -1,5 +1,7 @@
 from menus import get_col_name_menu, get_user_choice
+from classes import Graphics
 import matplotlib.pyplot as plt
+
 
 def scatter_plot(df, cols):
     colname1=cols[0]
@@ -37,7 +39,7 @@ def line_plot(df, cols):
 def graphics_app(df, menu_graph):
     user_choice = get_user_choice(menu_graph)
     col_options = list(df.columns)
-    
+
     if user_choice == 5: # Return to start
         return
 
@@ -54,7 +56,7 @@ def graphics_app(df, menu_graph):
             col_options.remove(selected_col)
             if user_choice == 4: # Histogram
                 histogram_plot(df, selected_col_list)
-                return
+                return Graphics(selected_col_list, "histogram")
             break
 
     while True:
@@ -68,9 +70,12 @@ def graphics_app(df, menu_graph):
 
     if user_choice == 1: # Scatter plot
         scatter_plot(df, selected_col_list)
+        return Graphics(selected_col_list, "scatter")
 
     elif user_choice == 2: # Line plot
         line_plot(df, selected_col_list)
+        return Graphics(selected_col_list, "line")
 
     elif user_choice == 3: # Bar chart
         bar_plot(df, selected_col_list)
+        return Graphics(selected_col_list, "bar")

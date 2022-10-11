@@ -4,16 +4,8 @@ from file_handler import read_file, FilenameException, get_filetype, save_file
 from filter import filter_app
 from summary import summary_app
 from graphics import graphics_app
+from classes import File, Graphics
 
-
-class File:
-    """ Creates File object which stores given file as Dataframe.
-    And has attributes type(filetype), df(DataFrame) and versions(list of dataframes)
-    """
-    def __init__(self, path):
-        self.type = get_filetype(path)
-        self.df = read_file(path)
-        self.versions = [self.df]
 
 def start_up_meny(menu_files_options, menu_files):
     """ A menu for selecting a file to start with
@@ -51,23 +43,27 @@ def app(data, menu_main):
     :param menu_main: Menu for the main application
     :type menu_main: dict
     """
+    graph_list = []
     while True:
         user_choice = get_user_choice(menu_main)
 
         if user_choice == 1: # Show dataframe
-            print((data.versions[-1]).head())
+            print(data.get_current().head())
             
         elif user_choice == 2: # Go to filter menu
             data.versions.append(filter_app(data, get_menu_filter()))
-
+            """ if exist graph object:
+                    for graphobject:
+                        if graphobject.graphtype == "scatter":
+                            scatter_graph(data.get_current(), graphobejct.colnames)
+            """
         elif user_choice == 3: # File summary
-            sum_return = summary_app(data.versions[-1], get_menu_summary())
+            sum_return = summary_app(data.get_current(), get_menu_summary())
             if sum_return is not None:
                 print(sum_return)
 
         elif user_choice == 4:
-            graphics_app(data.versions[-1], get_menu_graphics())
-
+            graph_list.append(graphics_app(data.get_current(), get_menu_graphics()))
         elif user_choice == 5:
             file_name = input("Chose filename\n: ")
             file_type = input("Chose filentype\n: ")
@@ -92,7 +88,7 @@ def app(data, menu_main):
 
 def main():
     """Main()
-    """
+"""
     path = start_up_meny(get_menu_files_options(), get_menu_files()) # get file_path
     data = File(path)
     app(data, get_menu_main())
