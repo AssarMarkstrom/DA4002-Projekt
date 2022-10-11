@@ -1,7 +1,6 @@
 xlrd
 openpyxl
 pandas
-python-tk
 matplotlib.figure
 matplotlib.pyplot
 matplotlib.backends.backed_tkagg
