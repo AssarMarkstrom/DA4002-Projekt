@@ -1,3 +1,9 @@
 xlrd
 openpyxl
 pandas
+Figures
+tkinter
+matplotlib.pyplot
+matplotlib.backends.backed_tkagg
+time
+threading
