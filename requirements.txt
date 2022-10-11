@@ -1,8 +1,8 @@
 xlrd
 openpyxl
 pandas
-Figures
 tkinter
+matplotlib.figure
 matplotlib.pyplot
 matplotlib.backends.backed_tkagg
 time
