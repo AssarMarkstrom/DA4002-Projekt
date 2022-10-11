@@ -68,9 +68,8 @@ def get_menu_summary():
         "3.": "Show std",
         "4.": "Show min",
         "5.": "Show max",
-        "6.": "Show # unique values",
-        "7.": "Show # duplicate values",
-        "8.": "Return to start menu"
+        "6.": "Count # unique values",
+        "7.": "Return to start menu"
     }
     return menu_summary
 
