@@ -3,7 +3,7 @@ openpyxl
 pandas
 matplotlib
 # matplotlib.Figure
-matplotlib.pyplot
-matplotlib.backends.backed_tkagg
+# matplotlib.pyplot
+# matplotlib.backends.backed_tkagg
 pytime
 thread6
