@@ -80,7 +80,7 @@ def value_filter(df, colname, value):
     value = str(value)
     coltype = df[colname].dtypes  # Store column's original datatype
     df[colname] = df[colname].astype(str) # Change column to string
-    df = df.where(df[colname].str.contains(value))
+    df = df.where(df[colname].str.contains(value, case = False))
     df = df.dropna(how='all')
     df[colname] = df[colname].astype(coltype)
     return df
