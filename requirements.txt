@@ -2,7 +2,8 @@ xlrd
 openpyxl
 pandas
 matplotlib
-matpyplot
+figure
+pyplot
 backends.backed_tkagg
 pytime
 thread6
