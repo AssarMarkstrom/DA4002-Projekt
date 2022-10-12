@@ -1,11 +1,12 @@
+from queue import Empty
 from menus import get_menu_files,get_menu_files_options, get_menu_main
 from menus import  get_menu_filter, get_menu_summary, get_menu_graphics, get_user_choice
 from file_handler import read_file, FilenameException, get_filetype, save_file
 from filter import filter_app
 from summary import summary_app
 from graphics import graphics_app
-from classes import File, Graphics
-
+from classes import File
+from GUI import multi_plot
 
 def start_up_meny(menu_files_options, menu_files):
     """ A menu for selecting a file to start with
@@ -52,11 +53,8 @@ def app(data, menu_main):
             
         elif user_choice == 2: # Go to filter menu
             data.versions.append(filter_app(data, get_menu_filter()))
-            """ if exist graph object:
-                    for graphobject:
-                        if graphobject.graphtype == "scatter":
-                            scatter_graph(data.get_current(), graphobejct.colnames)
-            """
+            if graph_list is not Empty:
+                multi_plot(data.get_current(), graph_list)
         elif user_choice == 3: # File summary
             sum_return = summary_app(data.get_current(), get_menu_summary())
             if sum_return is not None:
@@ -64,6 +62,7 @@ def app(data, menu_main):
 
         elif user_choice == 4:
             graph_list.append(graphics_app(data.get_current(), get_menu_graphics()))
+
         elif user_choice == 5:
             file_name = input("Chose filename\n: ")
             file_type = input("Chose filentype\n: ")
