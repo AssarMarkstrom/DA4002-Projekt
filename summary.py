@@ -102,6 +102,15 @@ def get_unique_values_count(df):
     return df_unique_count 
 
 def summary_app(df, menu_summary):
+    """ Summary app (menu)
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param menu_summary: Menu for summary
+    :type menu_summary: dict
+    :return: DataFrame with choosen summary function ex. mean
+    :rtype: pandas.DataFrame
+    """
     while True:
         user_choice = get_user_choice(menu_summary, "Please select an option!\n:")
 
