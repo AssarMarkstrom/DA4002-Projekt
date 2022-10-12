@@ -1,9 +1,17 @@
 from menus import get_col_name_menu, input_control, get_user_choice
 
 class BadBounds(Exception):
+    """ Class to create our own exception to detect invalid bounds
+    :param Exeption: Specific exception
+    :type Exception: Exception    
+    """
     def __init__(self):
         pass
 class OutOfRange(Exception):
+    """ Class to create our own exception to detect out of range row numbers 
+    :param Exeption: Specific exception
+    :type Exception: Exception    
+    """
     def __init__(self):
         pass
 
