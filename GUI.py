@@ -1,61 +1,77 @@
-from numpy import single
-import file_handler
-import graphics 
 import tkinter as tk
+from tkinter import Button
 import matplotlib.pyplot as plt
-import pandas as pd
-import time
-import threading
-# import random as randint
-
-from pandas import DataFrame
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
-
-#df=file_handler.read_file(".\\testfiles\\testfile.csv")
-
-
-
-# def single_plot(df, cols, root):
-
-#     colname1=cols[0]
-#     colname2=cols[1]
-#     figure_new = plt.Figure(figsize=(6,5), dpi=100)
-#     ax_new = figure_new.add_subplot(111)
-#     bar_new = FigureCanvasTkAgg(figure_new, root)
-#     bar_new.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
-#     df_new = df[[colname1,colname2]].groupby(colname2).sum()
-
-#     df_new.plot(kind='bar', legend=True, ax=ax_new)
-#     ax_new.set_title('Country Vs. GDP Per Capita')
-
-
-def single_plot(df, cols, root):
-
+def scatter_plot(df, cols):
     colname1=cols[0]
     colname2=cols[1]
-    figure_new = plt.Figure(figsize=(6,5), dpi=100)
-    ax_new = figure_new.add_subplot(111)
-    bar_new = FigureCanvasTkAgg(figure_new, root)
-    bar_new.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
-    df_new = df[[colname1,colname2]].groupby(colname2).sum()
+    plt.title(colname1 + " vs " + colname2)
+    plt.xlabel(colname1)
+    plt.ylabel(colname2)
+    plt.scatter(df[colname1], df[colname2])
+    plt.show()
 
-    df_new.plot(kind='bar', legend=True, ax=ax_new)
-    ax_new.set_title('Country Vs. GDP Per Capita')
+def histogram_plot(df, cols):
+    colname=cols[0]
+    plt.title(colname)
+    plt.hist(df[colname])
+    plt.show()
+
+def bar_plot(df, cols, ax_input):
+    colname1=cols[0]
+    colname2=cols[1]
+    plt.title(colname1 + " vs " + colname2)
+    plt.xlabel(colname1)
+    plt.ylabel(colname2)
+    plt.bar(df[colname1], df[colname2])
+    plt.plot(kind='bar', legend=True, ax=ax_input)
+
+def line_plot(df, cols):
+    colname1=cols[0]
+    colname2=cols[1]
+    plt.title(colname1 + " vs " + colname2)
+    plt.xlabel(colname1)
+    plt.ylabel(colname2)
+    plt.plot(df[colname1], df[colname2])
+    plt.show()
+
+
 
 
 
 def multi_plot(df, graph_list):
-
-    # single_plot(df, graph1.columns)
-
-    root= tk.Tk() 
-
+    window = tk.Toplevel()
     for graph in graph_list:
-        single_plot(df, graph.colnames, root)
+        single_plot(df, graph.colnames, window, graph.plottype)
 
-    root.mainloop()
+def single_plot(df, cols, root, plottype):
+    if len(cols) == 2:
+        colname2 = cols[1]
+        colname1 = cols[0]
+        figure_new = plt.figure(figsize=(6,5), dpi=100)
+        ax_new = figure_new.add_subplot(111)
+        bar_new = FigureCanvasTkAgg(figure_new, root)
+        bar_new.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+        df_new = df[[colname1, colname2]].groupby(colname1).sum()
+        #bar_plot(df, cols, ax_new)
 
 
-#def animate(df, cols):
+
+        if plottype == "bar":
+            bar_plot(df, cols, ax_new)
+            # ax_new.set_title('Country Vs. GDP Per Capita')
+
+        elif plottype == "line":     
+            df_new.plot(kind='line', legend=True, ax=ax_new)
+            ax_new.set_title('Country Vs. GDP Per Capita')
+
+        elif plottype == "scatter":
+            df_new.plot(kind='scatter', legend=True, ax=ax_new)
+            ax_new.set_title('Country Vs. GDP Per Capita')
+
+        elif plottype == "bar":
+            df_new.plot(kind='bar', legend=True, ax=ax_new)
+            ax_new.set_title('Country Vs. GDP Per Capita')
+
+    return

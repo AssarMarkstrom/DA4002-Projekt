@@ -7,7 +7,8 @@ from summary import summary_app
 from graphics import graphics_app
 from classes import File
 from GUI import multi_plot
-
+import tkinter as tk
+from sys import *
 def start_up_meny(menu_files_options, menu_files):
     """ A menu for selecting a file to start with
 
@@ -52,8 +53,9 @@ def app(data, menu_main):
             print(data.get_current().head())
             
         elif user_choice == 2: # Go to filter menu
-            data.versions.append(filter_app(data, get_menu_filter()))
-            if graph_list is not Empty:
+            filter_ = filter_app(data, get_menu_filter())
+            if graph_list is not Empty and filter_ is not None:
+                data.versions.append(filter_)
                 multi_plot(data.get_current(), graph_list)
         elif user_choice == 3: # File summary
             sum_return = summary_app(data.get_current(), get_menu_summary())
@@ -61,7 +63,7 @@ def app(data, menu_main):
                 print(sum_return)
 
         elif user_choice == 4:
-            graph_list.append(graphics_app(data.get_current(), get_menu_graphics()))
+            graph_list.append(graphics_app(data.get_current(), get_menu_graphics(), graph_list))
 
         elif user_choice == 5:
             file_name = input("Chose filename\n: ")
@@ -81,17 +83,21 @@ def app(data, menu_main):
         elif user_choice == 8: # Quit
             # Ask if Save df, save graphs
             print("Goodbye!")
-            break
+            return "Exit"
         else:
             print("Please select a valid option!\n:")
 
 def main():
     """Main()
 """
+    root= tk.Tk()
+    root.withdraw()
     path = start_up_meny(get_menu_files_options(), get_menu_files()) # get file_path
     data = File(path)
-    app(data, get_menu_main())
-
+    application = app(data, get_menu_main())
+    if application == "Exit":
+        quit()
+    root.mainloop()
 
 if __name__ == '__main__':
     main()
