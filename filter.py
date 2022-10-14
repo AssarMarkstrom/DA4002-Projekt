@@ -89,32 +89,35 @@ def filter_app(data, menu_filter):
 
     df = data.get_current()
     col_options = list(df.columns)
-    col_name_filter_menu = get_col_name_menu(col_options)
     selected_col_list = []
     user_choice = get_user_choice(menu_filter)
 
     if user_choice == 1: # keep/remove columns
         while True:
-            selected_col = get_user_choice(col_name_filter_menu, "Select column name\n:", check = False)
+            selected_col = get_user_choice(get_col_name_menu(col_options), "Select column name\n:", check = False)
             if selected_col in df.columns and selected_col not in selected_col_list:
                 selected_col_list.append(selected_col)
                 col_options.remove(selected_col)
-                answer = input_control("Select another column? (yes: 1, no: 2)\n: ", 2)
-                print("Selected columns:", selected_col_list)
-                if answer == 2:
-                    while True:
-                        question = "Do you want to keep or remove the selected columns (keep: 1, remove: 2)\n:"
-                        answer = input_control(question, 2)
-                        if answer == 1:
-                            return col_select(df, selected_col_list, keep = True)
-                        elif answer == 2:
-                            return col_select(df, selected_col_list, keep = False)
+                if len(col_options) > 0:
+                    answer = input_control("Select another column? (yes: 1, no: 2)\n: ", 2)
+                    if answer == 1:
+                        print("Selected columns:", selected_col_list)
+                        continue
+                while True:
+                    question = "Do you want to keep or remove the selected columns (keep: 1, remove: 2)\n:"
+                    answer = input_control(question, 2)
+                    if answer == 1:
+                        return col_select(df, selected_col_list, keep = True)
+                    elif answer == 2:
+                        return col_select(df, selected_col_list, keep = False)
+                
             else:
                 print("Invalid column name, try again!")
 
+
     elif user_choice == 2: # Filter by column value
         while True:
-            selected_col = get_user_choice(col_name_filter_menu, "What column do you want to filter on? \n:", check = False)
+            selected_col = get_user_choice(get_col_name_menu(col_options), "What column do you want to filter on? \n:", check = False)
             if selected_col in df.columns:
                 break
             else:
@@ -125,7 +128,7 @@ def filter_app(data, menu_filter):
     elif user_choice == 3: # Filter by column value interval
         col_options = get_numerical_coltypes(df)
         while True:
-            selected_col = get_user_choice(col_name_filter_menu, "What column do you want to filter on? \n:", check = False)
+            selected_col = get_user_choice(get_col_name_menu(col_options), "What column do you want to filter on? \n:", check = False)
             if selected_col in df.columns:
                 break
             else:

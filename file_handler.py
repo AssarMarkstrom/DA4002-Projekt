@@ -71,3 +71,17 @@ def get_filetype(filename):
     if filename[-5:] == ".xlsx":
         return "XLSX"
     return "UNKNOWN"
+    
+def save_app(data):
+    """ Saves file locally on user's computer
+
+    :param data: Object created from class File
+    :type data: Object
+    """
+    file_name = input("Chose filename\n: ")
+    file_type = input("Chose filetype\n: ")
+    while file_type not in ["csv" , "xlsx", "tsv", "xls"]: # If user's file type not recognised 
+        print("Invalid filetype, try again, csv, tsv, xls or xlsx")
+        file_type = input("Chose filentype\n: ")
+    my_file = file_name + "." + file_type # Create valid file name
+    save_file(my_file, data.get_current()) # Save file
