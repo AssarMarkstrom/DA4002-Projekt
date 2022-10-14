@@ -1,14 +1,13 @@
-from queue import Empty
 from menus import get_menu_files,get_menu_files_options, get_menu_main
 from menus import  get_menu_filter, get_menu_summary, get_menu_graphics, get_user_choice
-from file_handler import read_file, FilenameException, get_filetype, save_file
+from file_handler import FilenameException, read_file, save_file
 from filter import filter_app
 from summary import summary_app
 from graphics import graphics_app
 from classes import File
 from GUI import multi_plot
 import tkinter as tk
-from sys import *
+
 def start_up_meny(menu_files_options, menu_files):
     """ A menu for selecting a file to start with
 
@@ -54,7 +53,7 @@ def app(data, menu_main):
             
         elif user_choice == 2: # Go to filter menu
             filter_ = filter_app(data, get_menu_filter())
-            if graph_list is not Empty and filter_ is not None:
+            if len(graph_list) == 0  and filter_ is not None:
                 data.versions.append(filter_)
                 multi_plot(data.get_current(), graph_list)
         elif user_choice == 3: # File summary
