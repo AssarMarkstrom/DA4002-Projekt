@@ -106,11 +106,12 @@ def summary_app(df, menu_summary):
 
     :param df: DataFrame
     :type df: pandas.DataFrame
-    :param menu_summary: Menu
-    :type menu_summary: _type_
-    :return: _description_
-    :rtype: _type_
+    :param menu_summary: Menu for summary
+    :type menu_summary: dict
+    :return: DataFrame with choosen summary function ex. mean
+    :rtype: pandas.DataFrame
     """
+    
     while True:
         user_choice = get_user_choice(menu_summary, "Please select an option!\n:")
 

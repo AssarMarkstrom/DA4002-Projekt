@@ -1,27 +1,34 @@
 #!/bin/env python3
 import pandas as pd
 
-# made our own exception to detect filenames.
 class FilenameException(Exception):
+    """ Class to create our own exception to detect filenames.
+
+    :param Exception: Specific Exception
+    :type Exception: Exception
+    """
     def __init__(self):
         pass
 
-# Definition read_file checks what filenames it is from get_filetype
-# and read it's contents. 
-# Examples if the filename is a csv, it will be comma seperated.
-# the FilnameException detects files that are unknown. 
 def convert_to_numeric(val):
-    """convert to numeric if decimal == ','
+    """ Convert to numeric if decimal seperator is , instead of .
 
-    :param val: value
-    :type val: object
-    :return: the intended value
+    :param val: row-value
+    :type val: pandas.object
+    :return: converted row-value
     :rtype: float64
     """
     new_val = val.replace(',','.')
     return float(new_val)
 
 def change_dtypes(df):
+    """ If pandas auto-detected object dtype try to convert to numeric 
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :return: Dataframe with changed dtypes
+    :rtype: pandas.DataFrame
+    """
     for col in df.columns:
         if pd.api.types.is_object_dtype(df[col]):
             try:
@@ -31,6 +38,17 @@ def change_dtypes(df):
     return df
 
 def read_file(filename):
+    """ Checks what filenames it is from get_filetype() and read it's contents. 
+    Ex: If the filename is a csv, it will be comma seperated.
+    The FilnameException detects files that are unknown. 
+    Reads file using pandas
+
+    :param filename: filename
+    :type filename: str
+    :raises FilenameException: if filetype can not be interpreted
+    :return: DataFrame
+    :rtype: pandas.DataFrame
+    """
     filetype = get_filetype(filename)
     if filetype == "CSV":
         try:
@@ -43,11 +61,17 @@ def read_file(filename):
         return change_dtypes(pd.read_excel(filename))
     raise FilenameException()
  
-# Definition save_file will save the file based on what type of file it is.
-# Example: if it is a CSV, in the unittest it will save a tmp.csv on github. 
-# Due to os, it removes the file so th it does notat intefere with other files. 
-
 def save_file(filename, df):
+    """ Save the file based on what type of file it is.
+    Example: if it is a CSV, in the unittest it will save a tmp.csv on github. 
+    Due to os, it removes the file so th it does not intefere with other files. 
+
+    :param filename: filename
+    :type filename: str
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    """
+    
     filetype = get_filetype(filename)
     if filetype == "CSV":
         df.to_csv(filename, encoding='utf-8', index=False)
@@ -58,10 +82,15 @@ def save_file(filename, df):
     else:
         raise FilenameException()
 
-# Definition get_filetype, gets the filetype and helps the read_file,
-# get the type of file that is meant to be read. 
-
 def get_filetype(filename):
+    """ Gets the filetype and helps the read_file 
+    chose the correct type of the file. 
+
+    :param filename: filename   
+    :type filename: str
+    :return: filetype
+    :rtype: str
+    """
     if filename[-4:] == ".csv":
         return "CSV"
     if filename[-4:] == ".tsv":

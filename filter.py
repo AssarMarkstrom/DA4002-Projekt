@@ -1,31 +1,45 @@
 from menus import get_col_name_menu, input_control, get_user_choice
 
 class BadBounds(Exception):
+    """Class to create our own exception to detect invalid bounds
+
+    :param Exception: Specific exception
+    :type Exception: Exception
+    """
     def __init__(self):
         pass
 class OutOfRange(Exception):
+    """ Class to create our own exception to detect out of range row numbers
+
+    :param Exception: Specific exception
+    :type Exception: Exception
+    """
     def __init__(self):
         pass
 
 def get_numerical_coltypes(df):
-    """Help functions to only get numerical col_types
+    """ Help function to only get numerical dtypes for columns
 
     :param df: DataFrame
-    :type df: DataFrame
+    :type df: pandas.DataFrame
     :return: DataFrame
-    :rtype: DataFrame
+    :rtype: pandas.DataFrame
     """
     return df.select_dtypes(include=['int64', 'float64']) 
 
 def col_select(df, col_names, keep = True):
+    """ Select columns to keep/remove from dataframe
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param col_names: Name of columns in dataframe
+    :type col_names: list
+    :param keep: Removes columns if False, defaults to True
+    :type keep: bool, optional
+    :return: DataFrame
+    :rtype: pandas.DataFrame
     """
-    input:
-        df: pandas dataframe
-        col_names: list of strings
-        Boolean keep: if true df with col_names are returned,
-                        else df with col_names removed
-    Returns: pandas dataframe
-    """
+
     if keep:
         cols = []
         for col in df.columns:
@@ -38,13 +52,21 @@ def col_select(df, col_names, keep = True):
     return df
 
 def interval_filter(df, colname, lower_bound, upper_bound):
-    """
-    Input:
-        df: pandas dataframe
-        colname: column in df (string)
-        lower_bound/upper_bound: Interval which df is filtered on
-    Output: Filtered dataframe containing anly rows with values between lower and upper bound
-    """
+    """  Keep rows of dataframe with values in selected column between lower and upper bound
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param colname: Name of numeric column in DataFrame
+    :type colname: str
+    :param lower_bound: Lower bound of search interval
+    :type lower_bound: float64
+    :param upper_bound: Upper bound of search interval
+    :type upper_bound: float64
+    :raises BadBounds: Exception for invalid interval
+    :raises Exception: Exception non numeric
+    :return: Dataframe
+    :rtype: pandas.DataFrame
+    """  
     coltype = df[colname].dtypes
     if lower_bound < 0 or upper_bound < lower_bound:
         raise BadBounds
@@ -56,11 +78,18 @@ def interval_filter(df, colname, lower_bound, upper_bound):
     return df.dropna(how = 'all')
 
 def row_interval(df, lower_bound, upper_bound):
-    """
-    Input:
-        df: pandas dataframe
-        lower_bound/upper_bound: Desired row-interval
-    Output: Dataframe containing only rows in the given interval 
+    """ Keep rows of dataframe in interval lower_bound, upper_bound
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param lower_bound: Lower bound of wanted row number
+    :type lower_bound: int
+    :param upper_bound: Upper bound of wanted row number
+    :type upper_bound: int
+    :raises BadBounds: Exception for invalid bounds
+    :raises OutOfRange: Exception for out of range row numbers
+    :return: DataFrame
+    :rtype: pandas.DataFrame
     """
     if lower_bound < 0 or upper_bound < lower_bound:
         raise BadBounds
@@ -70,23 +99,35 @@ def row_interval(df, lower_bound, upper_bound):
     return df 
 
 def value_filter(df, colname, value):
-    """
-    Input:
-        df: pandas dataframe
-        colname: Name of a column in df (string)
-        value:
-    Output: Dataframe containing rows which have value in them 
+    """ Keep rows of dataframe where input value is found in chosen column
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param colname: Name of column in dataframe
+    :type colname: str
+    :param value: Pattern to filter by
+    :type value: any
+    :return: DataFrame
+    :rtype: pandas.DataFrame
     """
     value = str(value)
     coltype = df[colname].dtypes  # Store column's original datatype
     df[colname] = df[colname].astype(str) # Change column to string
-    df = df.where(df[colname].str.contains(value))
+    df = df.where(df[colname].str.contains(value, case = False))
     df = df.dropna(how='all')
     df[colname] = df[colname].astype(coltype)
     return df
 
 def filter_app(data, menu_filter):
-
+    """ Filter menu for the program
+    
+    :param data: Object created from class File
+    :type data: File object
+    :param menu_filter: Menu options for filter
+    :type menu_filter: dict
+    :return: DataFrame
+    :rtype: pandas.DataFrame
+    """
     df = data.get_current()
     col_options = list(df.columns)
     selected_col_list = []

@@ -40,7 +40,7 @@ def app(data, menu_main):
     """ Main menu for the program
 
     :param data: Object created from class File
-    :type data: Object
+    :type data: Object (File)
     :param menu_main: Menu for the main application
     :type menu_main: dict
     """
@@ -103,9 +103,11 @@ def app(data, menu_main):
 
 def main():
     """Main()
-"""
+    """
+    
     root= tk.Tk()
     root.withdraw()
+
     path = start_up_meny(get_menu_files_options(), get_menu_files()) # get file_path
     data = File(path)
     application = app(data, get_menu_main())
