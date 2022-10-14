@@ -70,10 +70,11 @@ def get_menu_main():
         "2.": "Filter file",
         "3.": "Show file summary", 
         "4.": "Graph data",
-        "5.": "Save current dataframe",
-        "6.": "Undo previous changes",
-        "7.": "Undo all changes",
-        "8.": "End program"
+        "5.": "Delete last graph",
+        "6.": "Save current dataframe",
+        "7.": "Undo previous changes",
+        "8.": "Undo all changes",
+        "9.": "End program"
     }
     return menu_main
 

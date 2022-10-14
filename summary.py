@@ -111,6 +111,7 @@ def summary_app(df, menu_summary):
     :return: DataFrame with choosen summary function ex. mean
     :rtype: pandas.DataFrame
     """
+    
     while True:
         user_choice = get_user_choice(menu_summary, "Please select an option!\n:")
 
