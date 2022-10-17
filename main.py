@@ -2,7 +2,7 @@ from ast import Global
 from menus import get_menu_files,get_menu_files_options, get_menu_main, input_control
 from menus import  get_menu_filter, get_menu_summary, get_menu_graphics, get_user_choice
 from file_handler import FilenameException, read_file, save_file, save_app
-from filter import filter_app
+from filter_handler import filter_app
 from summary import summary_app
 from graphics import graphics_app
 from classes import File
