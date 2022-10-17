@@ -1,2 +1,6 @@
 #!/bin/env bash
-python3 -m unittest test_*.py
+
+for i in test_*.py; do
+        echo "Running $i"
+        python3 -m unittest $i
+done
