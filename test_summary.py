@@ -2,7 +2,6 @@
 import unittest
 from file_handler import *
 from summary import *
-import pandas as pd
 
 class TestSummary(unittest.TestCase):
     def setUp(self):
@@ -11,6 +10,20 @@ class TestSummary(unittest.TestCase):
     
     def test_get_colnames(self):
         self.assertEqual(get_colnames(self.df), list(self.df.head(1)))
+
+    def test_get_unique_values_count(self):
+        unique_list = []
+        for col in self.df.columns:
+            for item in self.df[col]:
+                if item not in unique_list:
+                    unique_list.append(item)
+        
+            self.assertEqual(get_unique_values_count(self.df)._get_value('count', col)
+            ,len(unique_list))
+            unique_list.clear()
+        
+
+
 
 
    
