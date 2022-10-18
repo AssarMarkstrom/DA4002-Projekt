@@ -3,6 +3,15 @@ from classes import Graphics
 import matplotlib.pyplot as plt
 
 def scatter_plot(df, cols, ax_input):
+    """ Scatterplot
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param cols: columns for DataFrame
+    :type cols: list
+    :param ax_input: figure
+    :type ax_input: plt.figure
+    """
     colname1=cols[0]
     colname2=cols[1]
     plt.title(colname2 + " vs " + colname1)
@@ -12,12 +21,30 @@ def scatter_plot(df, cols, ax_input):
     plt.plot(kind='scatter', legend=True, ax=ax_input)
 
 def histogram_plot(df, cols, ax_input):
+    """ Histogramplot
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param cols: column for DataFrame
+    :type cols: list
+    :param ax_input: figure
+    :type ax_input: plt.figure
+    """
     colname=cols[0]
     plt.title(colname)
     plt.hist(df[colname])
     plt.plot(kind='histogram', legend=True, ax=ax_input)
 
 def bar_plot(df, cols, ax_input):
+    """ Barplot
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param cols: columns for DataFrame
+    :type cols: list
+    :param ax_input: figure
+    :type ax_input: plt.figure
+    """
     colname1=cols[0]
     colname2=cols[1]
     plt.title(colname2 + " vs " + colname1)
@@ -27,6 +54,15 @@ def bar_plot(df, cols, ax_input):
     plt.plot(kind='bar', legend=True, ax=ax_input)
 
 def line_plot(df, cols, ax_input):
+    """ Lineplot
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param cols: columns for DataFrame
+    :type cols: list
+    :param ax_input: figure
+    :type ax_input: plt.figure
+    """
     colname1=cols[0]
     colname2=cols[1]
     plt.title(colname2 + " vs " + colname1)
@@ -36,6 +72,15 @@ def line_plot(df, cols, ax_input):
     plt.plot(kind='line', legend=True, ax=ax_input)
 
 def graphics_app(df, menu_graph):
+    """ Graphics meny for the program 
+
+    :param df: DataFrame
+    :type df: pandas.DataFrame
+    :param menu_graph: Menu options for filter
+    :type menu_graph: dict
+    :return: DataFrame
+    :rtype: pandas.DataFrame
+    """
 
     user_choice = get_user_choice(menu_graph)
     col_options = list(df.columns)

@@ -102,7 +102,7 @@ def app(data, menu_main):
             print("Please select a valid option!\n:")
 
 def main():
-    """Main()
+    """ Main function
     """
     
     root= tk.Tk()

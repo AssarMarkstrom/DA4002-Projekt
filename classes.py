@@ -14,15 +14,8 @@ class File:
         return current
 
 class Graphics():
+    """ Creates Graphics object which has attributes colnames(list) and plottype(str)
+    """
     def __init__(self, colnames, plottype):
         self.colnames = colnames
         self.plottype = plottype
-
-
-"""
-path = "projectdata/helarsprestationer_from_2017.csv"
-testfile = File(path)
-# print(testfile.current)
-graph_obj = Graphics(["Kod", "Män"], "scatter", path)
-print(graph_obj.current)
-"""
