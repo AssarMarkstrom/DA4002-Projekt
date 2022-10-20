@@ -1,6 +1,6 @@
 # DA4002-Projekt: Data-analysis-tool
 
-![text](https://github.com/Natpa333/DA4002-Projekt/blob/main/Images/projectexample.png)
+![kasjdnfökjansdfkjasdåfjkansdkfjasdfj](https://github.com/Natpa333/DA4002-Projekt/blob/main/Images/projectexample.png)
 
 ## Description
 
