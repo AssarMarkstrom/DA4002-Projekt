@@ -11,7 +11,7 @@ class FilenameException(Exception):
         pass
 
 def convert_to_numeric(val):
-    """ Convert to numeric if decimal seperator is , instead of .
+    """ Convert to numeric if decimal seperator is, instead of .
 
     :param val: row-value
     :type val: pandas.object
@@ -52,7 +52,7 @@ def read_file(filename):
     filetype = get_filetype(filename)
     if filetype == "CSV":
         try:
-            return change_dtypes(pd.read_csv(filename, sep = ","))
+            return pd.read_csv(filename, sep = ",")
         except:
             return change_dtypes(pd.read_csv(filename, sep = ";"))
     elif filetype == "TSV":

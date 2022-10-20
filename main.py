@@ -104,7 +104,6 @@ def app(data, menu_main):
 def main():
     """ Main function
     """
-    
     root= tk.Tk()
     root.withdraw()
 
