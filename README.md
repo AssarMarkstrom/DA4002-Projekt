@@ -21,48 +21,50 @@ The purpose of this prototype is to allow multiple views of the same data to be 
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+To install the prerequisites and libraries.
+'''
+pip install requirements.txt
+'''
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+To download the program clone the repo:
+'''
+git clone https://github.com/Natpa333/DA4002-Projekt.git
+'''
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+To run the program type one of the following commands in the terminal:
 ```
-code blocks for commands
+python main.py
+```
+Or:
+```
+python3 main.py
 ```
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+For any advise on problems or issues contact one of the authors.
 
 ## Authors
 
-Contributors names and contact info!
+Assar Markström
+[assarmarkstrom@gmail.com]
 
-ex. Hubba Bubba 
-ex. [@HubbaBubba]
+Natalija Paunic
+[natalijapaunic@hotmail.com]
+
+Pia
+
+Sepehr
 
 ## Version History
-ex.
-* 0.2
-    * Various bug fixes and optimizations
 
 * 0.1
     * Initial Released
 
 ## License
 
-This project is licensed under the [NAME HER] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
+This project is licensed under the [MIT] License - see the LICENSE.md file for details
