@@ -1,5 +1,7 @@
 # DA4002-Projekt: Data-analysis-tool
 
+![text](https://github.com/Natpa333/DA4002-Projekt/blob/main/Images/projectexample.png)
+
 ## Description
 
 An advanced prototype of an application that allows interactive exploration of a multidimensional dataset. With loaded data, the application gives you tools to filter, visualize, and summarize data. The data can be either discrete or continuous, and is given in a column format. Data can be made up of various data types, such as integers, floats and strings. This data can be inputted in various ways, such as CSV, TSV, or Excel.
