@@ -22,16 +22,16 @@ The purpose of this prototype is to allow multiple views of the same data to be 
 ### Dependencies
 
 To install the prerequisites and libraries.
-'''
+```
 pip install requirements.txt
-'''
+```
 
 ### Installing
 
 To download the program clone the repo:
-'''
+```
 git clone https://github.com/Natpa333/DA4002-Projekt.git
-'''
+```
 
 ### Executing program
 
@@ -67,4 +67,4 @@ Sepehr
 
 ## License
 
-This project is licensed under the [MIT] License - see the LICENSE.md file for details
+This project is licensed under the [MIT] License - see the `LICENSE.md` file for details
