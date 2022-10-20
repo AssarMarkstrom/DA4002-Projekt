@@ -1,6 +1,8 @@
 # DA4002-Projekt: Data-analysis-tool
 
-![kasjdnfökjansdfkjasdåfjkansdkfjasdfj](https://github.com/Natpa333/DA4002-Projekt/blob/main/Images/projectexample.png)
+![alt text](https://github.com/Natpa333/DA4002-Projekt/blob/main/Images/projectexample.png)
+
+## Figure1: Shows an example of the programs visualisation.
 
 ## Description
 
