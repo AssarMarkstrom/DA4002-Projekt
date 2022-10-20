@@ -10,6 +10,7 @@ def get_user_choice(menu, question = "Please select an option!\n:", check = True
     :return: The input as a valid str/int depending on bool check
     :rtype: str or int
     """
+    
     n_options = len(menu)
     for choice in menu:
         print(choice, menu[choice])
